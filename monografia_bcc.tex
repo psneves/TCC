@@ -1145,24 +1145,68 @@ Aplicando a Equação \ref{eq:reduzirHpara3} nas imagens, elas serão transforma
 A Figura \ref{fig:platesIshihara} foi processada utilizando as equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirHpara6} e \ref{eq:reduzirHpara12}, separadamente. Os respectivos resultados são apresentados nas Figuras \ref{fig:reduzirHpara3}, \ref{fig:reduzirHpara6} e \ref{fig:reduzirHpara12}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.60\textwidth]{platesIshihara.png}
+\centering \includegraphics[width=0.90\textwidth]{platesIshihara.png}
 \caption{Pranchas de Ishihara) \label{fig:platesIshihara}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.60\textwidth]{figuraDeslocarH3.jpg}
+\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarH3.jpg}
 \caption{Resultado da Equação \ref{eq:reduzirHpara3} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHpara3}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.60\textwidth]{figuraDeslocarH6.jpg}
+\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarH6.jpg}
 \caption{Resultado da Equação \ref{eq:reduzirHpara6} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHpara6}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.60\textwidth]{figuraDeslocarH12.jpg}
+\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarH12.jpg}
 \caption{Resultado da Equação \ref{eq:reduzirHpara12} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHpara12}}
 \end{figure}
+
+Adicionalmente a redução de elementos do conjunto o qual H pertence, também foi implementado métodos de limitar os valores da saturação e do valor ou intensidade das imagens, conforme as equações \ref{eq:reduzirS}, \ref{eq:reduzirI} e \ref{eq:reduzirV}.
+
+\begin{equation}
+\label{eq:reduzirS}
+S'=\left\{
+\begin{array}{rc}
+       0,&\mbox{se}\quad S <    \frac{1}{6}                               \\
+    0.33,&\mbox{se}\quad S \geq \frac{1}{6} ou S < \frac{3}{6}      \\
+    0.66,&\mbox{se}\quad S \geq \frac{3}{6} ou S < \frac{5}{6}      \\
+       1,&\mbox{se}\quad S \geq \frac{5}{6}
+\end{array}\right.
+\end{equation}
+
+\begin{equation}
+\label{eq:reduzirI}
+I'=\left\{
+\begin{array}{rc}
+       0,&\mbox{se}\quad I <    \frac{1}{6}                               \\
+    0.33,&\mbox{se}\quad I \geq \frac{1}{6} ou I < \frac{3}{6}      \\
+    0.66,&\mbox{se}\quad I \geq \frac{3}{6} ou I < \frac{5}{6}      \\
+       1,&\mbox{se}\quad I \geq \frac{5}{6}
+\end{array}\right.
+\end{equation}
+
+\begin{equation}
+\label{eq:reduzirV}
+V'=\left\{
+\begin{array}{rc}
+       0,&\mbox{se}\quad V <    \frac{1}{6}                               \\
+    0.33,&\mbox{se}\quad V \geq \frac{1}{6} ou V < \frac{3}{6}      \\
+    0.66,&\mbox{se}\quad V \geq \frac{3}{6} ou V < \frac{5}{6}      \\
+       1,&\mbox{se}\quad V \geq \frac{5}{6}
+\end{array}\right.
+\end{equation}
+
+A Figura \ref{fig:reduzirHSeV} ilustra a aplicação das equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirV}.
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarHSeV.jpg}
+\caption{Resultado da aplicação das Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirV} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHSeV}}
+\end{figure}
+
+Os resultados obtidos com as Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirHpara6} e \ref{eq:reduzirHpara12} não foram satisfatórios. 
 
 
 \subsection{Elevar os valores da intensidade ou valor}
@@ -1221,7 +1265,7 @@ O teste original utiliza as 21 pranchas de Ishihara que estão na Figura \ref{fi
 Foi percebido que o contraste do dispositivo utilizado para a realização do teste influencia no resultado. Por esse e por outros motivos, não é possível definir se uma pessoa é daltônica somente após a realização do teste de Ishihara. No entanto, juntamente com o resultado do teste, é apresentado ao usuário se com base no resultado do teste ele possui indício de ser daltônico. Também é apresentada uma mensagem ao usuário recomendando a procura de um especialista para um diagnóstico preciso.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.9\textwidth]{pranchas.JPG}
+\centering \includegraphics[width=0.9\textwidth]{platesIshihara.png}
 \caption{Pranchas utilizadas no teste de Ishihara da Ferramenta. (adaptado de \citeonline{colorblindnesssite})} \label{fig:figuraTesteOriginalFerramenta}
 \end{figure}
 
@@ -1253,7 +1297,7 @@ A barra de controle intensidade.................................................
 3 significa XXXXXXX, 4 significa YYYYYYY, 5 significa QQQQQQQQQ,
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.6\textwidth]{pranchas.JPG}
+\centering \includegraphics[width=0.6\textwidth]{platesIshihara.png}
 \caption{Alterar imagem} \label{fig:figuraParametrosTeste}
 \end{figure}
 
@@ -1289,7 +1333,7 @@ Nenhum ação do usuário é esperada nessa tela. Ela possui o objetivo de infor
 É possível visualizar as informações apresentadas nessa tela na Figura \ref{fig:figuraSobre}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.6\textwidth]{pranchas.JPG}
+\centering \includegraphics[width=0.6\textwidth]{platesIshihara.png}
 \caption{Alterar imagem} \label{fig:figuraSobre}
 \end{figure}
 
