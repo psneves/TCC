@@ -1171,8 +1171,8 @@ Adicionalmente a redução de elementos do conjunto o qual H pertence, também f
 S'=\left\{
 \begin{array}{rc}
        0,&\mbox{se}\quad S <    \frac{1}{6}                               \\
-    0.33,&\mbox{se}\quad S \geq \frac{1}{6} ou S < \frac{3}{6}      \\
-    0.66,&\mbox{se}\quad S \geq \frac{3}{6} ou S < \frac{5}{6}      \\
+    0.33,&\mbox{se}\quad S \geq \frac{1}{6} e S < \frac{3}{6}      \\
+    0.66,&\mbox{se}\quad S \geq \frac{3}{6} e S < \frac{5}{6}      \\
        1,&\mbox{se}\quad S \geq \frac{5}{6}
 \end{array}\right.
 \end{equation}
@@ -1182,8 +1182,8 @@ S'=\left\{
 I'=\left\{
 \begin{array}{rc}
        0,&\mbox{se}\quad I <    \frac{1}{6}                               \\
-    0.33,&\mbox{se}\quad I \geq \frac{1}{6} ou I < \frac{3}{6}      \\
-    0.66,&\mbox{se}\quad I \geq \frac{3}{6} ou I < \frac{5}{6}      \\
+    0.33,&\mbox{se}\quad I \geq \frac{1}{6} e I < \frac{3}{6}      \\
+    0.66,&\mbox{se}\quad I \geq \frac{3}{6} e I < \frac{5}{6}      \\
        1,&\mbox{se}\quad I \geq \frac{5}{6}
 \end{array}\right.
 \end{equation}
@@ -1193,8 +1193,8 @@ I'=\left\{
 V'=\left\{
 \begin{array}{rc}
        0,&\mbox{se}\quad V <    \frac{1}{6}                               \\
-    0.33,&\mbox{se}\quad V \geq \frac{1}{6} ou V < \frac{3}{6}      \\
-    0.66,&\mbox{se}\quad V \geq \frac{3}{6} ou V < \frac{5}{6}      \\
+    0.33,&\mbox{se}\quad V \geq \frac{1}{6} e V < \frac{3}{6}      \\
+    0.66,&\mbox{se}\quad V \geq \frac{3}{6} e V < \frac{5}{6}      \\
        1,&\mbox{se}\quad V \geq \frac{5}{6}
 \end{array}\right.
 \end{equation}
@@ -1211,11 +1211,44 @@ A Figura \ref{fig:reduzirHSeV} ilustra a aplicação das equações \ref{eq:redu
 \caption{Resultado da aplicação das Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirI} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHSeI}}
 \end{figure}
 
-Os resultados obtidos com as Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirHpara6} e \ref{eq:reduzirHpara12} não foram satisfatórios. 
+Os resultados apresentados nesta Subseção não foram satisfatórios. Para poucas pranchas contidas na Figura \ref{fig:platesIshihara}, o número contido dentro dessas pranchas ficou mais fácil de ser identificado após os processamentos descritos. 
+
+Foram implementados outros dois processamentos com o objetivo de deslocar os valores da matiz, um resumo de cada um desses processamentos encontra-se abaixo:
+
+\begin{enumerate}
+\item \textbf{Distanciar os valores próximos a $60^o$:} O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esses motivos entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de distanciar essas cores, os valores do intervalo $[0^o;60^o]$ foram compactados no intervalo $[320^o;360^o$] e todos os valores do intervalo $[240^o;360^o]$ foram compactados no intervalo $[240^o;320^o[$. Analogamente, os valores do intervalo $]60^o;120^o]$ foram compactados no intervalo $[120^o; 160^o]$ e todos os valores do intervalo $[120^o;240^o[$ foram compactados no intervalo $]160^o;240^o[$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura sobre a Figura \ref{fig:platesIshihara}.
+\end{enumerate}
+
+
+Um deles distanciava os valores próximos a $60^o$, pois o amarelo está entre o verde e o vermelho, cores que a maioria dos daltônicos possuem dificuldade de distingur.
+
+As equações apresentadas limitam as cores, tornando-as mais fácil de identificar as diferenças entre as cores pela maioria dos daltônicos. No entanto, devido a impactante abstração dos sistemas de cores HSV e HSI, muitas características as quais os daltônicos não conseguiam identificar antes do processamento são perdidas, tornando assim a identificação dessas características impossível em alguns casos.
 
 
 \subsection{Elevar os valores da intensidade ou valor}
 \label{subsec:deslocarVouI}
+
+Assim como o processamento apresentado na Subseção \ref{subsec:deslocarH}, esse processamento é iniciado com a conversão de uma imagem RGB para o sistema de cores HSV ou HSI, após essa conversão outro processamento é realizado no sistema de cores HSV ou HSI e por fim a imagem é convertida de volta para o sistema de cores RGB. As conversão entre os sistemas de cores não são descritas nos processamentos apresentados, entende-se que elas são obrigatórias para todos os processamentos descritos neste trabalho.
+
+A ideia básica desse processamento é simples, ela consiste em multiplicar os valores de V ou I por um escalar. Quanto maior esse escalar, mais vibrante ou intensa a cor. Porém, é necessário verificar se o resultado dessa multiplicação não é maior do que o maior valor permitido para os elementos de V ou I, ou seja, se não é maior do que $1$. Para o sistema de cores HSV, esse processamento é descrito na Equação \ref{eq:elevarV} e para o sistema de cores HSI, na Equação \ref{eq:elevarI}.
+
+\begin{equation}
+\label{eq:elevarV}
+V'=\left\{
+\begin{array}{rc}
+       3 \times V,&\mbox{se}\quad 3 \times V < 1 \\
+       1,&\mbox{caso contrário}
+\end{array}\right.
+\end{equation}
+
+\begin{equation}
+\label{eq:elevarI}
+I'=\left\{
+\begin{array}{rc}
+       3 \times I,&\mbox{se}\quad 3 \times I < 1 \\
+       1,&\mbox{caso contrário}
+\end{array}\right.
+\end{equation}
 
 
 
