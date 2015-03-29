@@ -1215,13 +1215,17 @@ Os resultados apresentados nesta Subseção não foram satisfatórios. Para pouc
 
 Foram implementados outros dois processamentos com o objetivo de deslocar os valores da matiz, um com o objetivo de deslocar os valores próximos a $60^o$ e o outro com o objetivo de deslocar os valores próximo a região que mais possui valores, ou seja, o pico do histograma.
 
-O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esses motivos entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de deslocar os valores próximos a $60^o$, os valores do intervalo $[0^o;60^o]$ foram compactados no intervalo $[320^o;360^o$] e todos os valores do intervalo $[240^o;360^o]$ foram compactados no intervalo $[240^o;320^o[$. Analogamente, os valores do intervalo $]60^o;120^o]$ foram compactados no intervalo $[120^o; 160^o]$ e todos os valores do intervalo $[120^o;240^o[$ foram compactados no intervalo $]160^o;240^o[$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS}, \ref{eq:reduzirV} ou \ref{eq:reduzirI}.
+O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esses motivos entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de deslocar os valores próximos a $60^o$, os valores do intervalo $[0^o;60^o]$ foram compactados no intervalo $[320^o;360^o$] e todos os valores do intervalo $[240^o;360^o]$ foram compactados no intervalo $[240^o;320^o[$. Analogamente, os valores do intervalo $]60^o;120^o]$ foram compactados no intervalo $[120^o; 160^o]$ e todos os valores do intervalo $[120^o;240^o[$ foram compactados no intervalo $]160^o;240^o[$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirV}.
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarAzulHSV.jpg}
+\caption{Deslocar valores de H próximos a $60^o$.}
+\label{fig:reduzirHamarelo}
+\end{figure}
 
 
 
 
-
-Um deles distanciava os valores próximos a $60^o$, pois o amarelo está entre o verde e o vermelho, cores que a maioria dos daltônicos possuem dificuldade de distingur.
 
 As equações apresentadas limitam as cores, tornando-as mais fácil de identificar as diferenças entre as cores pela maioria dos daltônicos. No entanto, devido a impactante abstração dos sistemas de cores HSV e HSI, muitas características as quais os daltônicos não conseguiam identificar antes do processamento são perdidas, tornando assim a identificação dessas características impossível em alguns casos.
 
