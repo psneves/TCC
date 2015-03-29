@@ -1215,15 +1215,25 @@ Os resultados apresentados nesta Subseção não foram satisfatórios. Para pouc
 
 Foram implementados outros dois processamentos com o objetivo de deslocar os valores da matiz, um com o objetivo de deslocar os valores próximos a $60^o$ e o outro com o objetivo de deslocar os valores próximo a região que mais possui valores, ou seja, o pico do histograma.
 
-O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esses motivos entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de deslocar os valores próximos a $60^o$, os valores do intervalo $[0^o;60^o]$ foram compactados no intervalo $[320^o;360^o$] e todos os valores do intervalo $[240^o;360^o]$ foram compactados no intervalo $[240^o;320^o[$. Analogamente, os valores do intervalo $]60^o;120^o]$ foram compactados no intervalo $[120^o; 160^o]$ e todos os valores do intervalo $[120^o;240^o[$ foram compactados no intervalo $]160^o;240^o[$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirV}.
+O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esses motivos entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de deslocar os valores próximos a $60^o$, os valores do intervalo $[0^o;60^o]$ foram compactados no intervalo $[320^o;360^o$] e todos os valores do intervalo $[240^o;360^o]$ foram compactados no intervalo $[240^o;320^o[$. Analogamente, os valores do intervalo $]60^o;120^o]$ foram compactados no intervalo $[120^o; 160^o]$ e todos os valores do intervalo $[120^o;240^o[$ foram compactados no intervalo $]160^o;240^o[$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirV}. A Figura \ref{fig:figuraColorsHamarelo} ilustra os possíveis valores após distanciar os valores próximos a $60^o$. A Figura \ref{fig:reduzirHamareloHSI} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirI}.
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraColorsHamarelo.jpg}
+\caption{Possíveis valores após distanciar valores próximos a $60^o$.}
+\label{fig:figuraColorsHamarelo}
+\end{figure}
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.90\textwidth]{figuraDeslocarAzulHSV.jpg}
-\caption{Deslocar valores de H próximos a $60^o$.}
+\caption{Deslocar valores de H próximos a $60^o$ no sistema HSV.}
 \label{fig:reduzirHamarelo}
 \end{figure}
 
-
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarAzulHSI.jpg}
+\caption{Deslocar valores de H próximos a $60^o$ no sistema HSI.}
+\label{fig:reduzirHamareloHSI}
+\end{figure}
 
 
 
