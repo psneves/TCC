@@ -410,7 +410,7 @@ A Figura \ref{fig:figuraSensibilidadeCones} ilustra a provável porcentagem de a
 \end{figure}
 
 \section{Tipos de daltonismo}
-
+\label{sec:tiposDaltonismo}
 Pessoas daltônicas possuem alguma deficiência nos cones. É possível classificá-los em três tipos: Os monocromatas, os dicromatas e os portadores de daltonismo do tipo tricomacia anômala. A Tabela \ref{tab:probabilidadeDaltonismo} apresenta o percentual aproximado de mulheres e homens daltônicos para cada um dos subtipos existentes e a seguir serão apresentados detalhes de cada um dos tipos e subtipos de daltonismo.
 
 
@@ -419,7 +419,7 @@ Pessoas daltônicas possuem alguma deficiência nos cones. É possível classifi
 \begin{tabular}{|L{10em} |C{6em} |C{6em}|}
 \hline      
 
-\textbf{Tipo de daltonismo} & Homens (\%)  & Mulheres (\%)      \\ \hline
+\textbf{Tipo de daltonismo} & \textbf{Homens (\%)}  & \textbf{Mulheres (\%)}      \\ \hline
 Protanopia                  & 1            & 0,02               \\ \hline
 Protanomalia                & 1,5          & 0,03               \\ \hline
 Deuteranopia                & 1            & 0,01               \\ \hline
@@ -525,7 +525,7 @@ O objetivo de um sistema de cores é definir um padrão para representação das
 
 O sistema de cores mais utilizado atualmente em monitores e câmeras digitais é o RGB. Esse sistema utiliza as cores primárias vermelho, verde e azul como base. Por outro lado, o sistema CMY (ciano, magenta e amarelo, do inglês cyan, magenta and yellow), que utiliza as cores secundárias ciano, magenta e amarelo, é mais utilizado em impressoras. 
 
-Os sistema de cores HSI (matiz, saturação e intensidade, do inglês hue, saturation and intensity) e HSV (matiz, saturação e value, do inglês hue, saturation and value) são mais próximos ao sistema visual humano do que os sistemas de cores RGB e CMY, porque a identificação de uma cor no sistema visual humano não é realizada apenas através da composição de três cores básicas. Uma cor é definida pela composição de matiz, saturação e brilho. A seguir são apresentados mais detalhes dos sistemas de cores RGB, CMY, HSI e HSV.
+Os sistema de cores HSI (matiz\footnote{Matiz: Conjunto de cores diversas bem combinadas; cada uma das gradações de uma cor; variedade de colorido. \cite{aurelioonline}}, saturação e intensidade, do inglês hue, saturation and intensity) e HSV (matiz, saturação e valor, do inglês hue, saturation and value) são mais próximos ao sistema visual humano do que os sistemas de cores RGB e CMY, porque a identificação de uma cor no sistema visual humano não é realizada apenas através da composição de três cores básicas. Uma cor é definida pela composição de matiz, saturação e brilho. A seguir são apresentados mais detalhes dos sistemas de cores RGB, CMY, HSI e HSV.
 
 \subsection{RGB}
 
@@ -1045,24 +1045,107 @@ Com a finalidade de facilitar a distinção de cores por daltônicos, \citeonlin
 
 \section{Escolha do sistema de cor}
 
+A sequência descrita na Figura \ref{fig:figFluxoCorrecao} foi testada utilizando os sistemas de cores HSI e HSV. Foi escolhido processar as imagens nesses sistemas de cores porque eles se aproximam da maneira em que os seres humanos identificam as cores. 
 
+Com isso, todas as tentativas de processamento para alcançar o objetivo deste trabalho se resumem em converter uma imagem RGB para o sistema de cores HSI ou HSV, realizar dado processamento e converter a imagem para de volta o sistema de cores RGB. Detalhes dos processamentos de imagens realizados nesses sistemas de cores serão apresentados na Seção \ref{sec:processamentoDasImagens}.
+
+A ferramenta desenvolvida utiliza apenas um desses dois sistemas de cores. Inicialmente não era possível definir qual apresentaria resultado melhores, por isso foram realizados testes com ambos.
 
 
 \section{Processamento das imagens}
+\label{sec:processamentoDasImagens}
 
-O sistema de cores escolhido para a manipulação de imagens foi o HSV. Essa escolha foi feita após a realização de testes com os sistemas de cores HSI e HSV. O HSV foi o sistema de cores escolhido por apresentar melhores resultados do que o HSI. 
+Afim de alcançar o objetivo desse trabalho, foram desenvolvidas duas abordagens diferentes. A primeira tem como principal objetivo \textbf{reduzir possíveis valores da matiz} e a segunda \textbf{elevar os valores da intensidade ou valor}, utilizando o sistema de cores HSI ou HSV. Essas abordagens serão descritas com detalhes nas Subseções \ref{subsec:deslocarH} e \ref{subsec:deslocarVouI}.
 
-Os processamentos de imagens realizados neste TCC iniciam com a conversão de uma imagem do sistema de cores RGB para o sistema de cor HSV, é seguido por um processamento no sistema de cores HSV e é finalizado com a conversão do resultado para o sistema de cores RGB.
+\subsection{Reduzir possíveis valores da matiz}
+\label{subsec:deslocarH}
 
-Afim de alcançar o objetivo desse trabalho, foram desenvolvidas duas abordagens diferentes. A primeira, tem como principal objetivo deslocar os valores de H e a segunda os valores de V. No entanto, elas são compostas por processamentos que podem alterar todas as três componentes do sistema de cor HSV. Cada uma dessas abordagens será descrita com mais detalhes nas Subseções a seguir.
-
-\subsection{Deslocar os valores de H}
-
-O componente H do sistema de cores HSV representa a Matiz da imagem
+O componente H dos sistemas de cores HSI e HSV representa a matiz. A matiz é definida por um ângulo que está no intervalo $[0^o, 360^o]$. A Tabela \ref{tab:coresEmH} apresenta os ângulos de algumas cores nesse componente e a Figura \ref{fig:figuraColorsH} ilustra a posição dessas cores dentro de um círculo que representa os possíveis valores de H.
 
 
-\subsection{Remover cores confusas}
+\begin{table}[h]
+\centering
+\begin{tabular}{clcccccc}
+\hline      
 
+\textbf{Ângulo}     & \textbf{Cor}  \\ \hline
+$0^o$ / $360^o$     & Vermelho      \\ \hline
+$30^o$              & Laranja       \\ \hline
+$60^o$              & Amarelo       \\ \hline
+$900^o$             & Oliva         \\ \hline
+$120^o$             & Verde         \\ \hline
+$150^o$             & Turquesa      \\ \hline
+$180^o$             & Ciano         \\ \hline
+$210^o$             & Celeste       \\ \hline
+$240^o$             & Azul          \\ \hline
+$270^o$             & Púrpura       \\ \hline
+$300^o$             & Magenta       \\ \hline
+$330^o$             & Rosa          \\ \hline
+
+\end{tabular}
+\caption{Ângulos de algumas cores no componente H dos sistemas de cores HSI e HSV.}
+\label{tab:coresEmH}
+\end{table}
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.60\textwidth]{figuraColorsH.PNG}
+\caption{Matiz dos sistemas de cores HSI e HSV. (adaptado de \citeonline{onextrapixel}) \label{fig:figuraColorsH}}
+\end{figure}
+
+A maioria dos daltônicos visualizam as três cores primárias (vermelho, verde e azul) mas possuem deficiência em um tipo de cone, conforme foi apresentado no Seção \ref{sec:tiposDaltonismo}. 
+
+Dado que os valores de H estão no intervalo $[0^o, 360^o]$ e que os ângulos pertencentes a H não necessitam ser inteiros, existem infinitos valores possíveis para H. Com o objetivo de facilitar a distinção de cores por daltônicos, o primeiro processamento de imagem executado neste trabalho reduz os possíveis valores de H para um conjunto finito de 3, 6 e 12 elementos.
+
+A transformação de H para 3 elementos é realizada através da Equação \ref{eq:reduzirHpara3}, para 6 através da Equação \ref{eq:reduzirHpara6} e para 12 através da Equação \ref{eq:reduzirHpara12}. 
+
+\begin{equation}
+\label{eq:reduzirHpara3}
+H'=\left\{
+\begin{array}{rc}
+    0^o,&\mbox{se}\quad H <60^o ou H \geq 300^o \\
+    120^o,&\mbox{se}\quad H \geq 60^o e H < 180^o \\
+    240^o,&\mbox{se}\quad H \geq 180^o e H < 300^o \\
+\end{array}\right.
+\end{equation}
+
+\begin{equation}
+\label{eq:reduzirHpara6}
+H''=\left\{
+\begin{array}{rc}
+    0^o,&\mbox{se}\quad H <30^o ou H \geq 330^o \\
+    60^o,&\mbox{se}\quad H \geq 30^o e H < 90^o \\
+    120^o,&\mbox{se}\quad H \geq 90^o e H < 150^o \\
+    180^o,&\mbox{se}\quad H \geq 150^o e H < 210^o \\
+    240^o,&\mbox{se}\quad H \geq 210^o e H < 270^o \\
+    300^o,&\mbox{se}\quad H \geq 270^o e H < 330^o \\
+\end{array}\right.
+\end{equation}
+
+\begin{equation}
+\label{eq:reduzirHpara12}
+H'''=\left\{
+\begin{array}{rc}
+    0^o,&\mbox{se}\quad H <15^o ou H \geq 345^o \\
+    30^o,&\mbox{se}\quad H \geq 15^o e H < 45^o \\
+    60^o,&\mbox{se}\quad H \geq 45^o e H < 75^o \\
+    90^o,&\mbox{se}\quad H \geq 75^o e H < 105^o \\
+    120^o,&\mbox{se}\quad H \geq 105^o e H < 135^o \\
+    150^o,&\mbox{se}\quad H \geq 135^o e H < 165^o \\
+    180^o,&\mbox{se}\quad H \geq 165^o e H < 195^o \\
+    210^o,&\mbox{se}\quad H \geq 195^o e H < 225^o \\
+    240^o,&\mbox{se}\quad H \geq 225^o e H < 255^o \\
+    270^o,&\mbox{se}\quad H \geq 255^o e H < 285^o \\
+    300^o,&\mbox{se}\quad H \geq 285^o e H < 315^o \\
+    330^o,&\mbox{se}\quad H \geq 315^o e H < 345^o \\
+\end{array}\right.
+\end{equation}
+
+Aplicando a Equação \ref{eq:reduzirHpara3} nas imagens, elas serão transformadas em imagens em tons de vermelho, verde e azul. Aplicando a Equação \ref{eq:reduzirHpara6}, as imagens serão compostas por tons de vermelho, amarelo, verde, ciano, azul e magenta. Por fim, aplicando a Equação \ref{eq:reduzirHpara6}, as imagens serão compostas por tons de vermelho, laranja, amarelo, oliva, verde, turquesa, ciano, celeste, azul, púrpura, magenta e rosa.
+
+
+
+\subsection{Elevar os valores da intensidade ou valor}
+\label{subsec:deslocarVouI}
 
 
 
