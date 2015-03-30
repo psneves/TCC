@@ -1237,41 +1237,37 @@ O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamen
 
 Foi implementado um método que divide H em 360 intervalos e identifica qual intervalo possui mais incidências. Se um pixel é branco, ele não é contabilizado, pois o valor de H é indiferente. Nesse método, o intervalo $0$ representa $0^o$, o intervalo $1$ representa $1^o$ e assim sucessivamente. Após identificar esse valor, os valores são deslocados seguindo a mesma analogia do deslocamento dos valores de H próximos a $60^o$, no entanto os valores deslocados serão os que são próximos ao valor com maior número de incidencias encontrado. Por exemplo, na imagem original da Figura \ref{fig:figuraHistogramaHSV} o valor com $35^o$ é o com maior número de incidências, então os valores próximos a $35^o$ serão deslocados, que são os valores contidos no intervalo $[0^o;95^o] \cup [335^o;360^o]$. As Figuras \ref{fig:figuraHistogramaHSV}, \ref{fig:figuraHistogramaHSV2} e \ref{fig:figuraHistogramaHSV3} apresentam o resultado desse processamento em algumas pranchas de Ishihara. Esse método não apresenta bons resultados com a Figura \ref{fig:platesIshihara} porque ele deve encontrar a cor mais comum em cada uma das pranchas.
 
-\begin{figure}[!htb]
-\centering \includegraphics[width=0.9\textwidth]{figuraHistograma.png}
-\caption{Resultado do deslocando dos valores próximos a $35^o$ e limitando os valores de saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV}
-\end{figure}
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.9\textwidth]{figuraHistograma.png}
-\caption{Resultado do deslocando dos valores próximos a $35^o$ e limitando os valores de saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV2}
+\caption{Resultado do deslocando dos valores próximos a $35^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.}  \label{fig:figuraHistogramaHSV}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.9\textwidth]{figuraHistograma2.png}
-\caption{Resultado do deslocando dos valores próximos a $41^o$ e limitando os valores de saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV2}
+\caption{Resultado do deslocando dos valores próximos a $41^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV2}
 \end{figure}
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.9\textwidth]{figuraHistograma3.png}
-\caption{Resultado do deslocando dos valores próximos a $56^o$ e limitando os valores de saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV3}
+\caption{Resultado do deslocando dos valores próximos a $56^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV3}
 \end{figure}
 
-As equações apresentadas limitam as cores, tornando-as mais fácil de identificar as diferenças entre as cores pela maioria dos daltônicos. No entanto, devido a impactante abstração dos sistemas de cores HSV e HSI, muitas características as quais os daltônicos não conseguiam identificar antes do processamento são perdidas, tornando impossível a identificação dessas características em algumas pranchas, até mesmo para pessoas que não são daltônicas.
+Os processamentos apresentados nesta Subseção limitam as cores, tornando mais fácil a identificação das diferenças entre as cores pela maioria dos daltônicos. No entanto, devido a impactante abstração que foi realizada nos sistemas de cores HSV e HSI, muitas características são perdidas, o que faz com que os valores dentro de algumas pranchas não possam ser identificados. Em alguns casos, a identificação das cores torna-se mais complicada até mesmo para pessoas que não são portadoras de daltonismo.
 
 
 \subsection{Elevar os valores da intensidade ou valor}
 \label{subsec:deslocarVouI}
 
-Assim como o processamento apresentado na Subseção \ref{subsec:deslocarH}, esse processamento é iniciado com a conversão de uma imagem RGB para o sistema de cores HSV ou HSI, após essa conversão outro processamento é realizado no sistema de cores HSV ou HSI e por fim a imagem é convertida de volta para o sistema de cores RGB. As conversão entre os sistemas de cores não são descritas nos processamentos apresentados, entende-se que elas são obrigatórias para todos os processamentos descritos neste trabalho.
+Assim como o processamento apresentado na Subseção \ref{subsec:deslocarH}, esse processamento é iniciado com a conversão de uma imagem RGB para o sistema de cores HSV ou HSI, após essa conversão outro processamento é realizado no sistema de cores HSV ou HSI e por fim a imagem é convertida de volta para o sistema de cores RGB. As conversões entre os sistemas de cores não são descritas nos processamentos apresentados, entende-se que elas são obrigatórias para todos os processamentos descritos neste trabalho.
 
-A ideia básica desse processamento é simples, ela consiste em multiplicar os valores de V ou I por um escalar. Quanto maior esse escalar, mais vibrante ou intensa a cor. Porém, é necessário verificar se o resultado dessa multiplicação não é maior do que o maior valor permitido para os elementos de V ou I, ou seja, se não é maior do que $1$. Para o sistema de cores HSV, esse processamento é descrito na Equação \ref{eq:elevarV} e para o sistema de cores HSI, na Equação \ref{eq:elevarI}.
+A ideia básica desse processamento é simples, ela consiste em multiplicar os valores de V ou I por um escalar. Quanto maior esse escalar, mais vibrante ou intensa a cor. Porém, é necessário verificar se o resultado dessa multiplicação não é maior do que o maior valor permitido para os elementos de V ou I, ou seja, se não é maior do que $1$. Para o sistema de cores HSV, esse processamento é descrito na Equação \ref{eq:elevarV}, onde o escalar é representado pela letra $x$, e para o sistema de cores HSI o processamento é descrito na Equação \ref{eq:elevarI}, onde o escalar é representado por $y$.
 
 \begin{equation}
 \label{eq:elevarV}
 V'=\left\{
 \begin{array}{rc}
-       3 \times V,&\mbox{se}\quad 3 \times V < 1 \\
+       $x$ \times V,&\mbox{se}\quad $x$ \times V < 1 \\
        1,&\mbox{caso contrário}
 \end{array}\right.
 \end{equation}
@@ -1280,12 +1276,50 @@ V'=\left\{
 \label{eq:elevarI}
 I'=\left\{
 \begin{array}{rc}
-       3 \times I,&\mbox{se}\quad 3 \times I < 1 \\
+       $y$ \times I,&\mbox{se}\quad $y$ \times I < 1 \\
        1,&\mbox{caso contrário}
 \end{array}\right.
 \end{equation}
 
+As Figuras \ref{fig:figuraElevarV} e \ref{fig:figuraElevarI} ilustram o resultado obtido após o processamento descrito nas Equações \ref{eq:elevarV} e \ref{eq:elevarI}, respectivamente, sobre a Figura \ref{fig:platesIshihara}, com $x = 3$ e $y = 3$.
 
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraElevarV.jpg}
+\caption{Processamento da Equação \ref{eq:elevarV} sobre a Figura \ref{fig:platesIshihara}. \label{fig:figuraElevarV}}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraElevarI.jpg}
+\caption{Processamento da Equação \ref{eq:elevarI} sobre a Figura \ref{fig:platesIshihara}. \label{fig:figuraElevarI}}
+\end{figure}
+
+Para tornar as cores das imagens ainda mais vibrantes e intensas, também foi implementado um método para realçar a saturação das imagens. Esse método utiliza a mesmo lógica apresentada nas Equações \ref{eq:elevarV} e \ref{eq:elevarI}, multiplicando os valores da componente S por um escalar $z$, conforme apresentado na Equação \ref{eq:elevarS}.
+
+\begin{equation}
+\label{eq:elevarS}
+S'=\left\{
+\begin{array}{rc}
+       $z$ \times S,&\mbox{se}\quad $z$ \times S < 1 \\
+       1,&\mbox{caso contrário}
+\end{array}\right.
+\end{equation}
+
+Algumas imagens foram adicionadas a esse trabalho para ilustrar o resultado da Equação \ref{eq:elevarS}. A Figura \ref{fig:figuraElevarS} apresenta o resultado dessa equação com $z=3$. A Figura \ref{fig:figuraElevarSeV} apresenta a imagem resultante dos processamentos das Equações \ref{eq:elevarV} e \ref{eq:elevarS}, com $z = 3$ e $x = 3$. A Figura \ref{fig:figuraElevarSeI} apresenta a imagem resultante dos processamentos das Equações \ref{eq:elevarI} e \ref{eq:elevarS}, com $z = 3$ e $y = 3$.
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraElevarS.jpg}
+\caption{Processamento da Equação \ref{eq:elevarS} sobre a Figura \ref{fig:platesIshihara}, com $z = 3$. \label{fig:figuraElevarS}}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraElevarSeV.jpg}
+\caption{Processamento das Equações \ref{eq:elevarS} e \ref{eq:elevarV} sobre a Figura \ref{fig:platesIshihara}, com $z = 3$ e $x = 3$. \label{fig:figuraElevarSeV}}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.90\textwidth]{figuraElevarSeI.jpg}
+\caption{Processamento das Equações \ref{eq:elevarS} e \ref{eq:elevarI} sobre a Figura \ref{fig:platesIshihara}, com $z = 3$ e $y = 3$. \label{fig:figuraElevarSeI}}
+\end{figure}
 
 \subsection{Sistema HSV}
 \label{subsec:alterarValues} 
