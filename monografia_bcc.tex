@@ -414,7 +414,7 @@ A Figura \ref{fig:figuraSensibilidadeCones} ilustra a provável porcentagem de a
 Pessoas daltônicas possuem alguma deficiência nos cones. É possível classificá-los em três tipos: Os monocromatas, os dicromatas e os portadores de daltonismo do tipo tricomacia anômala. A Tabela \ref{tab:probabilidadeDaltonismo} apresenta o percentual aproximado de mulheres e homens daltônicos para cada um dos subtipos existentes e a seguir serão apresentados detalhes de cada um dos tipos e subtipos de daltonismo.
 
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \begin{tabular}{|L{10em} |C{6em} |C{6em}|}
 \hline      
@@ -702,16 +702,16 @@ As Figuras \ref{fig:figuraCuboRGB}, \ref{fig:figuraComponentesHSI} e \ref{fig:fi
 O sistema de cores HSV também é denotado por HSB (matriz, saturação e brilho, do inglês hue, saturantion and brightness)\cite{burger2009digital}. A Figura \ref{fig:figuraHSV} apresenta uma possível representação gráfica do desse sistema de cores, a Figura \ref{fig:figuraHSV2} ilustra a posição de algumas cores dentro desse sistema e a Tabela \ref{tab:exemploHSV} lista os valores dos pontos que estão na Figura \ref{fig:figuraHSV2}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.5\textwidth]{figuraHSV.png}
+\centering \includegraphics[width=0.4\textwidth]{figuraHSV.png}
 \caption{O sistema de cores HSV, també conhecido como HSB. (retirado de \citeonline{processing}) \label{fig:figuraHSV}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.5\textwidth]{figuraHSV2.png}
+\centering \includegraphics[width=0.4\textwidth]{figuraHSV2.png}
 \caption{Posição de cores dentro do sistema de cores HSV. (retirado de \citeonline{burger2009digital}) \label{fig:figuraHSV2}}
 \end{figure}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \begin{tabular}{clcccccc}
 \hline      
@@ -1051,19 +1051,18 @@ Com isso, todas as tentativas de processamento para alcançar o objetivo deste t
 
 A ferramenta desenvolvida utiliza apenas um desses dois sistemas de cores. Inicialmente não era possível definir qual apresentaria resultado melhores, por isso foram realizados testes com ambos.
 
-
 \section{Processamento das imagens}
 \label{sec:processamentoDasImagens}
 
-Afim de alcançar o objetivo desse trabalho, foram desenvolvidas duas abordagens diferentes. A primeira tem como principal objetivo \textbf{reduzir possíveis valores da matiz} e a segunda \textbf{elevar os valores da intensidade ou valor}, utilizando o sistema de cores HSI ou HSV. Essas abordagens serão descritas com detalhes nas Subseções \ref{subsec:deslocarH} e \ref{subsec:deslocarVouI}.
+Afim de alcançar o objetivo desse trabalho, foram desenvolvidas três abordagens diferentes. A primeira tem como principal objetivo \textbf{eliminar intervalos na matiz}, a segunda \textbf{deslocar os valores da matiz} e a terceira \textbf{elevar os valores da saturação, intensidade ou valor}, utilizando o sistema de cores HSI ou HSV. Essas abordagens serão descritas com detalhes nas Subseções \ref{subsec:eliminarIntervalosH}, \ref{subsec:deslocarMatiz} e \ref{subsec:deslocarVouI}.
 
-\subsection{Reduzir possíveis valores da matiz}
-\label{subsec:deslocarH}
+\subsection{Eliminar intervalos na matiz}
+\label{subsec:eliminarIntervalosH}
 
 O componente H dos sistemas de cores HSI e HSV representa a matiz. A matiz é definida por um ângulo que está no intervalo $[0^o, 360^o]$. A Tabela \ref{tab:coresEmH} apresenta os ângulos de algumas cores nesse componente e a Figura \ref{fig:figuraColorsH} ilustra a posição dessas cores dentro de um círculo que representa os possíveis valores de H.
 
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \begin{tabular}{clcccccc}
 \hline      
@@ -1072,7 +1071,7 @@ O componente H dos sistemas de cores HSI e HSV representa a matiz. A matiz é de
 $0^o$ / $360^o$     & Vermelho      \\ \hline
 $30^o$              & Laranja       \\ \hline
 $60^o$              & Amarelo       \\ \hline
-$900^o$             & Oliva         \\ \hline
+$90^o$              & Oliva         \\ \hline
 $120^o$             & Verde         \\ \hline
 $150^o$             & Turquesa      \\ \hline
 $180^o$             & Ciano         \\ \hline
@@ -1101,42 +1100,42 @@ A transformação de H para 3 elementos é realizada através da Equação \ref{
 \begin{equation}
 \label{eq:reduzirHpara3}
 H'=\left\{
-\begin{array}{rc}
-    0^o,&\mbox{se}\quad H <60^o ou H \geq 300^o \\
-    120^o,&\mbox{se}\quad H \geq 60^o e H < 180^o \\
-    240^o,&\mbox{se}\quad H \geq 180^o e H < 300^o \\
+\begin{array}{rclcl}
+    0^o,    &\mbox{se}  & H <60^o       & \mbox{ou} & H \geq 300^o  \\
+    120^o,  &\mbox{se}  & H \geq 60^o   & \mbox{e}  & H < 180^o     \\
+    240^o,  &\mbox{se}  & H \geq 180^o  & \mbox{e}  & H < 300^o     \\
 \end{array}\right.
 \end{equation}
 
 \begin{equation}
 \label{eq:reduzirHpara6}
 H''=\left\{
-\begin{array}{rc}
-    0^o,&\mbox{se}\quad H <30^o ou H \geq 330^o \\
-    60^o,&\mbox{se}\quad H \geq 30^o e H < 90^o \\
-    120^o,&\mbox{se}\quad H \geq 90^o e H < 150^o \\
-    180^o,&\mbox{se}\quad H \geq 150^o e H < 210^o \\
-    240^o,&\mbox{se}\quad H \geq 210^o e H < 270^o \\
-    300^o,&\mbox{se}\quad H \geq 270^o e H < 330^o \\
+\begin{array}{rclcl}
+    0^o,    &\mbox{se}  & H <30^o       & \mbox{ou} & H \geq 330^o  \\
+    60^o,   &\mbox{se}  & H \geq 30^o   & \mbox{e}  & H < 90^o      \\
+    120^o,  &\mbox{se}  & H \geq 90^o   & \mbox{e}  & H < 150^o     \\
+    180^o,  &\mbox{se}  & H \geq 150^o  & \mbox{e}  & H < 210^o     \\
+    240^o,  &\mbox{se}  & H \geq 210^o  & \mbox{e}  & H < 270^o     \\
+    300^o,  &\mbox{se}  & H \geq 270^o  & \mbox{e}  & H < 330^o     \\
 \end{array}\right.
 \end{equation}
 
 \begin{equation}
 \label{eq:reduzirHpara12}
 H'''=\left\{
-\begin{array}{rc}
-    0^o,&\mbox{se}\quad H <15^o ou H \geq 345^o \\
-    30^o,&\mbox{se}\quad H \geq 15^o e H < 45^o \\
-    60^o,&\mbox{se}\quad H \geq 45^o e H < 75^o \\
-    90^o,&\mbox{se}\quad H \geq 75^o e H < 105^o \\
-    120^o,&\mbox{se}\quad H \geq 105^o e H < 135^o \\
-    150^o,&\mbox{se}\quad H \geq 135^o e H < 165^o \\
-    180^o,&\mbox{se}\quad H \geq 165^o e H < 195^o \\
-    210^o,&\mbox{se}\quad H \geq 195^o e H < 225^o \\
-    240^o,&\mbox{se}\quad H \geq 225^o e H < 255^o \\
-    270^o,&\mbox{se}\quad H \geq 255^o e H < 285^o \\
-    300^o,&\mbox{se}\quad H \geq 285^o e H < 315^o \\
-    330^o,&\mbox{se}\quad H \geq 315^o e H < 345^o \\
+\begin{array}{rclcl}
+    0^o,    &\mbox{se}  & H <15^o       & \mbox{ou} & H \geq 345^o \\
+    30^o,   &\mbox{se}  & H \geq 15^o   & \mbox{e}  & H < 45^o \\
+    60^o,   &\mbox{se}  & H \geq 45^o   & \mbox{e}  & H < 75^o \\
+    90^o,   &\mbox{se}  & H \geq 75^o   & \mbox{e}  & H < 105^o \\
+    120^o,  &\mbox{se}  & H \geq 105^o  & \mbox{e}  & H < 135^o \\
+    150^o,  &\mbox{se}  & H \geq 135^o  & \mbox{e}  & H < 165^o \\
+    180^o,  &\mbox{se}  & H \geq 165^o  & \mbox{e}  & H < 195^o \\
+    210^o,  &\mbox{se}  & H \geq 195^o  & \mbox{e}  & H < 225^o \\
+    240^o,  &\mbox{se}  & H \geq 225^o  & \mbox{e}  & H < 255^o \\
+    270^o,  &\mbox{se}  & H \geq 255^o  & \mbox{e}  & H < 285^o \\
+    300^o,  &\mbox{se}  & H \geq 285^o  & \mbox{e}  & H < 315^o \\
+    330^o,  &\mbox{se}  & H \geq 315^o  & \mbox{e}  & H < 345^o \\
 \end{array}\right.
 \end{equation}
 
@@ -1145,22 +1144,22 @@ Aplicando a Equação \ref{eq:reduzirHpara3} nas imagens, elas serão transforma
 A Figura \ref{fig:platesIshihara} foi processada utilizando as equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirHpara6} e \ref{eq:reduzirHpara12}, separadamente. Os respectivos resultados são apresentados nas Figuras \ref{fig:reduzirHpara3}, \ref{fig:reduzirHpara6} e \ref{fig:reduzirHpara12}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{platesIshihara.png}
-\caption{Pranchas de Ishihara \label{fig:platesIshihara}}
+\centering \includegraphics[width=0.80\textwidth]{platesIshihara.png}
+\caption{Pranchas de Ishihara. (adaptado de \citeonline{colorblindnesssite} e \citeonline{colorvisiontesting}) \label{fig:platesIshihara}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarH3.jpg}
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocarH3.jpg}
 \caption{Resultado da Equação \ref{eq:reduzirHpara3} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHpara3}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarH6.jpg}
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocarH6.jpg}
 \caption{Resultado da Equação \ref{eq:reduzirHpara6} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHpara6}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarH12.jpg}
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocarH12.jpg}
 \caption{Resultado da Equação \ref{eq:reduzirHpara12} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHpara12}}
 \end{figure}
 
@@ -1169,104 +1168,170 @@ Adicionalmente a redução de elementos do conjunto o qual H pertence, também f
 \begin{equation}
 \label{eq:reduzirS}
 S'=\left\{
-\begin{array}{rc}
-       0,&\mbox{se}\quad S <    \frac{1}{6}                               \\
-    0.33,&\mbox{se}\quad S \geq \frac{1}{6} e S < \frac{3}{6}      \\
-    0.66,&\mbox{se}\quad S \geq \frac{3}{6} e S < \frac{5}{6}      \\
-       1,&\mbox{se}\quad S \geq \frac{5}{6}
+\begin{array}{rclcl}
+       0,   &\mbox{se}  & S <    \frac{1}{6}                                    \\
+    0.33,   &\mbox{se}  & S \geq \frac{1}{6} & \mbox{e} & S < \frac{3}{6}       \\
+    0.66,   &\mbox{se}  & S \geq \frac{3}{6} & \mbox{e} & S < \frac{5}{6}       \\
+       1,   &\mbox{se}  & S \geq \frac{5}{6}
 \end{array}\right.
 \end{equation}
 
 \begin{equation}
 \label{eq:reduzirI}
 I'=\left\{
-\begin{array}{rc}
-       0,&\mbox{se}\quad I <    \frac{1}{6}                               \\
-    0.33,&\mbox{se}\quad I \geq \frac{1}{6} e I < \frac{3}{6}      \\
-    0.66,&\mbox{se}\quad I \geq \frac{3}{6} e I < \frac{5}{6}      \\
-       1,&\mbox{se}\quad I \geq \frac{5}{6}
+\begin{array}{rclcl}
+       0,   &\mbox{se}  & I <    \frac{1}{6}                        \\
+    0.33,   &\mbox{se}  & I \geq \frac{1}{6} & \mbox{e} & I < \frac{3}{6}      \\
+    0.66,   &\mbox{se}  & I \geq \frac{3}{6} & \mbox{e} & I < \frac{5}{6}      \\
+       1,   &\mbox{se}  & I \geq \frac{5}{6}
 \end{array}\right.
 \end{equation}
 
 \begin{equation}
 \label{eq:reduzirV}
 V'=\left\{
-\begin{array}{rc}
-       0,&\mbox{se}\quad V <    \frac{1}{6}                               \\
-    0.33,&\mbox{se}\quad V \geq \frac{1}{6} e V < \frac{3}{6}      \\
-    0.66,&\mbox{se}\quad V \geq \frac{3}{6} e V < \frac{5}{6}      \\
-       1,&\mbox{se}\quad V \geq \frac{5}{6}
+\begin{array}{rclcl}
+       0,   &\mbox{se}  & V <    \frac{1}{6}                                 \\
+    0.33,   &\mbox{se}  & V \geq \frac{1}{6} & \mbox{e} V < \frac{3}{6}      \\
+    0.66,   &\mbox{se}  & V \geq \frac{3}{6} & \mbox{e} V < \frac{5}{6}      \\
+       1,   &\mbox{se}  & V \geq \frac{5}{6}
 \end{array}\right.
 \end{equation}
 
 A Figura \ref{fig:reduzirHSeV} ilustra a aplicação das equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirV} sobre a Figura \ref{fig:platesIshihara} e a A Figura \ref{fig:reduzirHSeI} ilustra a aplicação das equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirI} sobre a Figura \ref{fig:platesIshihara}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarHSeV.jpg}
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocarHSeV.jpg}
 \caption{Resultado da aplicação das Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirV} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHSeV}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarHSeI.jpg}
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocarHSeI.jpg}
 \caption{Resultado da aplicação das Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirI} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHSeI}}
 \end{figure}
 
 Os resultados apresentados nesta Subseção não foram satisfatórios. Para poucas pranchas contidas na Figura \ref{fig:platesIshihara}, o número contido dentro dessas pranchas ficou mais fácil de ser identificado após os processamentos descritos. 
 
-Foram implementados outros dois processamentos com o objetivo de deslocar os valores da matiz, um com o objetivo de deslocar os valores próximos a $60^o$ e o outro com o objetivo de deslocar os valores próximos a região que mais possui valores incidentes em H, ou seja, o pico do histograma. Para esses métodos, os valores próximos foram definidos como os valores que estão até $60^o$ de distância do ângulo (e.g. valores próximos a $60^o$ são os valores que estão no intervalo $[0^o;120^o]$).
+Foram implementados outros dois processamentos com o objetivo de reduzir os valores da matiz, um com o objetivo de eliminar os valores próximos a $60^o$ e o outro com o objetivo de eliminar os valores próximos a região que mais possui valores incidentes em H, ou seja, o pico do histograma. Para esses processamentos, os valores próximos de um ângulo foram definidos como os valores que estão até $60^o$ de distância desse ângulo (e.g. valores próximos a $60^o$ são os valores que estão no intervalo $[0^o;120^o]$).
 
-O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esses motivos entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de deslocar os valores próximos a $60^o$, os valores do intervalo $[0^o;60^o]$ foram compactados no intervalo $[320^o;360^o$] e todos os valores do intervalo $[240^o;360^o]$ foram compactados no intervalo $[240^o;320^o[$. Analogamente, os valores do intervalo $]60^o;120^o]$ foram compactados no intervalo $[120^o; 160^o]$ e todos os valores do intervalo $[120^o;240^o[$ foram compactados no intervalo $]160^o;240^o[$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirV}. A Figura \ref{fig:figuraColorsHamarelo} ilustra os possíveis valores após distanciar os valores próximos a $60^o$. A Figura \ref{fig:reduzirHamareloHSI} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirI}.
+O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esses motivos entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de eliminar os valores próximos a $60^o$, os valores do intervalo $[0^o;60^o]$ foram compactados no intervalo $[320^o;360^o$] e todos os valores do intervalo $[240^o;360^o]$ foram compactados no intervalo $[240^o;320^o[$. Analogamente, os valores do intervalo $]60^o;120^o]$ foram compactados no intervalo $[120^o; 160^o]$ e todos os valores do intervalo $[120^o;240^o[$ foram compactados no intervalo $]160^o;240^o[$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirV}. A Figura \ref{fig:figuraColorsHamarelo} ilustra os possíveis valores após distanciar os valores próximos a $60^o$. A Figura \ref{fig:reduzirHamareloHSI} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirI}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.60\textwidth]{figuraColorsHamarelo.PNG}
+\centering \includegraphics[width=0.40\textwidth]{figuraColorsHamarelo.PNG}
 \caption{Possíveis valores após distanciar valores próximos a $60^o$.}
 \label{fig:figuraColorsHamarelo}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarAzulHSV.jpg}
-\caption{Deslocar valores de H próximos a $60^o$ no sistema HSV.}
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocarAzulHSV.jpg}
+\caption{Eliminar valores de H próximos a $60^o$ no sistema HSV.}
 \label{fig:reduzirHamarelo}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraDeslocarAzulHSI.jpg}
-\caption{Deslocar valores de H próximos a $60^o$ no sistema HSI.}
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocarAzulHSI.jpg}
+\caption{Eliminar valores de H próximos a $60^o$ no sistema HSI.}
 \label{fig:reduzirHamareloHSI}
 \end{figure}
 
-Foi implementado um método que divide H em 360 intervalos e identifica qual intervalo possui mais incidências. Se um pixel é branco, ele não é contabilizado, pois o valor de H é indiferente. Nesse método, o intervalo $0$ representa $0^o$, o intervalo $1$ representa $1^o$ e assim sucessivamente. Após identificar esse valor, os valores são deslocados seguindo a mesma analogia do deslocamento dos valores de H próximos a $60^o$, no entanto os valores deslocados serão os que são próximos ao valor com maior número de incidencias encontrado. Por exemplo, na imagem original da Figura \ref{fig:figuraHistogramaHSV} o valor com $35^o$ é o com maior número de incidências, então os valores próximos a $35^o$ serão deslocados, que são os valores contidos no intervalo $[0^o;95^o] \cup [335^o;360^o]$. As Figuras \ref{fig:figuraHistogramaHSV}, \ref{fig:figuraHistogramaHSV2} e \ref{fig:figuraHistogramaHSV3} apresentam o resultado desse processamento em algumas pranchas de Ishihara. Esse método não apresenta bons resultados com a Figura \ref{fig:platesIshihara} porque ele deve encontrar a cor mais comum em cada uma das pranchas.
+Foi implementado um método que divide H em 360 intervalos e identifica qual intervalo possui mais incidências. Se um pixel é branco, ele não é contabilizado, pois o valor de H é indiferente. Nesse método, o intervalo $0$ representa $0^o$, o intervalo $1$ representa $1^o$ e assim sucessivamente. Após identificar esse valor, a definição do intervalo que será eliminado segue a mesma analogia da eliminação dos valores de H próximos a $60^o$. No entanto, nesse método, os valores eliminados serão os que estão próximos ao valor com maior número de incidências encontrado. Por exemplo, na imagem original da Figura \ref{fig:figuraHistogramaHSV} o valor com $35^o$ é o com maior número de incidências, então os valores próximos a $35^o$ serão eliminados, que são os valores contidos no intervalo $[0^o;95^o] \cup [335^o;360^o]$. As Figuras \ref{fig:figuraHistogramaHSV}, \ref{fig:figuraHistogramaHSV2} e \ref{fig:figuraHistogramaHSV3} apresentam o resultado desse processamento em algumas pranchas de Ishihara. Se esse método fosse executado tendo como entrada a Figura \ref{fig:platesIshihara}, ele encontraria o intervalo que possui mais incidências em todas as pranchas e não em cada prancha separadamente.
 
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.9\textwidth]{figuraHistograma.png}
-\caption{Resultado do deslocando dos valores próximos a $35^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.}  \label{fig:figuraHistogramaHSV}
+\centering \includegraphics[width=0.8\textwidth]{figuraHistograma.png}
+\caption{Resultado após eliminar os valores próximos a $35^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.}  \label{fig:figuraHistogramaHSV}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.9\textwidth]{figuraHistograma2.png}
-\caption{Resultado do deslocando dos valores próximos a $41^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV2}
+\centering \includegraphics[width=0.8\textwidth]{figuraHistograma2.png}
+\caption{Resultado após eliminar os valores próximos a $41^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV2}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.9\textwidth]{figuraHistograma3.png}
-\caption{Resultado do deslocando dos valores próximos a $56^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV3}
+\centering \includegraphics[width=0.8\textwidth]{figuraHistograma3.png}
+\caption{Resultado após eliminar os valores próximos a $56^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV3}
 \end{figure}
 
-Os processamentos apresentados nesta Subseção limitam as cores, tornando mais fácil a identificação das diferenças entre as cores pela maioria dos daltônicos. No entanto, devido a impactante abstração que foi realizada nos sistemas de cores HSV e HSI, muitas características são perdidas, o que faz com que os valores dentro de algumas pranchas não possam ser identificados. Em alguns casos, a identificação das cores torna-se mais complicada até mesmo para pessoas que não são portadoras de daltonismo.
+Os processamentos apresentados nesta Subseção limitam as cores, tornando mais fácil a identificação das diferenças entre as cores pela maioria dos daltônicos. No entanto, devido a grande abstração que foi realizada nos sistemas de cores HSV e HSI, muitas características são perdidas, o que faz com que os valores dentro de algumas pranchas não possam ser identificados. Em alguns casos, a identificação das cores torna-se mais complicada até mesmo para pessoas que não são portadoras de daltonismo.
+
+\subsection{Deslocar os valores da matiz}
+\label{subsec:deslocarMatiz}
+
+Esse método desloca todos os valores da matiz H. Com isso, todos os valores de H serão modificados para outros valores. O objetivo desse processamento é deslocar cores que estão em um intervalo confuso para pessoas daltônicas para outro intervalo onde não há confusão de cores. No entanto, ao mesmo tempo em que alguns valores saem do intervalo confuso, outros entram nesse intervalo. As Equações \ref{eq:deslocarH120} e \ref{eq:deslocarH240} apresentam o processamento necessário para deslocar os valores de H em $120^o$ e $240^o$, respectivamente. A Tabela \ref{tab:exemplosDeslocamento} apresenta o resultado desses processamentos para alguns valores de H.
+
+\begin{equation}
+\label{eq:deslocarH120}
+H'=\left\{
+\begin{array}{rl}
+       H + 120^o,   &\mbox{se}  H < 240^o \\
+       H - 240^o,   &\mbox{caso contrário} \\
+\end{array}\right.
+\end{equation}
+
+\begin{equation}
+\label{eq:deslocarH240}
+H'=\left\{
+\begin{array}{rl}
+       H + 240^o,   &\mbox{se}  H < 120^o \\
+       H - 120^o,   &\mbox{caso contrário} \\
+\end{array}\right.
+\end{equation}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccc}
+\hline      
+
+\textbf{Ângulo entrada} & \textbf{Saída deslocamento $120^o$} & \textbf{Saída deslocamento $240^o$}     \\ \hline
+$0^o$ / $360^o$         & $120^o$                       &  $240^o$                          \\ \hline
+$30^o$                  & $150^o$                       &  $270^o$                          \\ \hline
+$60^o$                  & $180^o$                       &  $300^o$                          \\ \hline
+$90^o$                  & $210^o$                       &  $330^o$                          \\ \hline
+$120^o$                 & $240^o$                       &  $0^o$                            \\ \hline
+$150^o$                 & $270^o$                       &  $30^o$                           \\ \hline
+$180^o$                 & $300^o$                       &  $60^o$                           \\ \hline
+$210^o$                 & $330^o$                       &  $90^o$                           \\ \hline
+$240^o$                 & $0^o$                         &  $120^o$                          \\ \hline
+$270^o$                 & $30^o$                        &  $150^o$                          \\ \hline
+$300^o$                 & $60^o$                        &  $180^o$                          \\ \hline
+$330^o$                 & $90^o$                        &  $210^o$                          \\ \hline
+
+\end{tabular}
+\caption{Exemplos de deslocamentos de $120^o$ e $240^o$}
+\label{tab:exemplosDeslocamento}
+\end{table}
+
+Relacionando a Tabela \ref{tab:coresEmH} com a Tabela \ref{tab:exemplosDeslocamento}, se observa que para o deslocamento de $120^o$ a cor vermelha é transformada em verde, a cor verde em azul e a cor azul em vermelha. Com essa mesma relação, se pode observar que para o deslocamento de $240^o$ a cor vermelha é transformada em azul, a verde em vermelho e a azul em verde.
+
+A Figura \ref{fig:deslocamento120} exibe o resultado do processamento da Equação \ref{eq:deslocarH120} sobre a Figura \ref{fig:platesIshihara}, as cores da imagem se alteram completamente nessa figura. Devido ao fato de que as pranchas de Ishihara foram criadas com o objetivo de identificar o tipo de daltonismo vermelho-verde, a maioria dos pixels das pranchas desse teste são coloridos com as cores vermelho, verde ou cores formadas através da mistura dessas duas cores. Por deslocar os valores de H em $120^o$, a maioria dos pixels da Figura \ref{fig:deslocamento120} são verde, azul ou a mistura dessas duas cores.
+
+A Figura \ref{fig:deslocamento240} exibe o resultado do processamento da Equação \ref{eq:deslocarH240} sobre a Figura \ref{fig:platesIshihara}. Analogamente a Figura \ref{fig:deslocamento120}, a maoria dos pixels da Figura \ref{fig:deslocamento240} são azul, vermelho ou a mistura dessas duas cores.
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocar120.jpg}
+\caption{Processamento da Equação \ref{eq:deslocarH120} sobre a Figura \ref{fig:platesIshihara}. \label{fig:deslocamento120}}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.80\textwidth]{figuraDeslocar240.jpg}
+\caption{Processamento da Equação \ref{eq:deslocarH240} sobre a Figura \ref{fig:platesIshihara}. \label{fig:deslocamento240}}
+\end{figure}
 
 
-\subsection{Elevar os valores da intensidade ou valor}
+
+\ref{tab:coresEmH}
+
+\subsection{Elevar os valores da saturação, intensidade ou valor}
 \label{subsec:deslocarVouI}
 
-Assim como o processamento apresentado na Subseção \ref{subsec:deslocarH}, esse processamento é iniciado com a conversão de uma imagem RGB para o sistema de cores HSV ou HSI, após essa conversão outro processamento é realizado no sistema de cores HSV ou HSI e por fim a imagem é convertida de volta para o sistema de cores RGB. As conversões entre os sistemas de cores não são descritas nos processamentos apresentados, entende-se que elas são obrigatórias para todos os processamentos descritos neste trabalho.
+Assim como o processamento apresentado na Subseção \ref{subsec:eliminarIntervalosH}, esse processamento é iniciado com a conversão de uma imagem RGB para o sistema de cores HSV ou HSI, após essa conversão outro processamento é realizado no sistema de cores HSV ou HSI e por fim a imagem é convertida de volta para o sistema de cores RGB. As conversões entre os sistemas de cores não são descritas nos processamentos apresentados, entende-se que elas são obrigatórias para todos os processamentos descritos neste trabalho.
 
 A ideia básica desse processamento é simples, ela consiste em multiplicar os valores de V ou I por um escalar. Quanto maior esse escalar, mais vibrante ou intensa a cor. Porém, é necessário verificar se o resultado dessa multiplicação não é maior do que o maior valor permitido para os elementos de V ou I, ou seja, se não é maior do que $1$. Para o sistema de cores HSV, esse processamento é descrito na Equação \ref{eq:elevarV}, onde o escalar é representado pela letra $x$, e para o sistema de cores HSI o processamento é descrito na Equação \ref{eq:elevarI}, onde o escalar é representado por $y$.
 
 \begin{equation}
 \label{eq:elevarV}
 V'=\left\{
-\begin{array}{rc}
+\begin{array}{rl}
        $x$ \times V,&\mbox{se}\quad $x$ \times V < 1 \\
        1,&\mbox{caso contrário}
 \end{array}\right.
@@ -1275,7 +1340,7 @@ V'=\left\{
 \begin{equation}
 \label{eq:elevarI}
 I'=\left\{
-\begin{array}{rc}
+\begin{array}{rl}
        $y$ \times I,&\mbox{se}\quad $y$ \times I < 1 \\
        1,&\mbox{caso contrário}
 \end{array}\right.
@@ -1284,13 +1349,13 @@ I'=\left\{
 As Figuras \ref{fig:figuraElevarV} e \ref{fig:figuraElevarI} ilustram o resultado obtido após o processamento descrito nas Equações \ref{eq:elevarV} e \ref{eq:elevarI}, respectivamente, sobre a Figura \ref{fig:platesIshihara}, com $x = 3$ e $y = 3$.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraElevarV.jpg}
-\caption{Processamento da Equação \ref{eq:elevarV} sobre a Figura \ref{fig:platesIshihara}. \label{fig:figuraElevarV}}
+\centering \includegraphics[width=0.80\textwidth]{figuraElevarV.jpg}
+\caption{Processamento da Equação \ref{eq:elevarV} sobre a Figura \ref{fig:platesIshihara}, com $x = 3$. \label{fig:figuraElevarV}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraElevarI.jpg}
-\caption{Processamento da Equação \ref{eq:elevarI} sobre a Figura \ref{fig:platesIshihara}. \label{fig:figuraElevarI}}
+\centering \includegraphics[width=0.80\textwidth]{figuraElevarI.jpg}
+\caption{Processamento da Equação \ref{eq:elevarI} sobre a Figura \ref{fig:platesIshihara}, com $y = 3$. \label{fig:figuraElevarI}}
 \end{figure}
 
 Para tornar as cores das imagens ainda mais vibrantes e intensas, também foi implementado um método para realçar a saturação das imagens. Esse método utiliza a mesmo lógica apresentada nas Equações \ref{eq:elevarV} e \ref{eq:elevarI}, multiplicando os valores da componente S por um escalar $z$, conforme apresentado na Equação \ref{eq:elevarS}.
@@ -1298,7 +1363,7 @@ Para tornar as cores das imagens ainda mais vibrantes e intensas, também foi im
 \begin{equation}
 \label{eq:elevarS}
 S'=\left\{
-\begin{array}{rc}
+\begin{array}{rl}
        $z$ \times S,&\mbox{se}\quad $z$ \times S < 1 \\
        1,&\mbox{caso contrário}
 \end{array}\right.
@@ -1307,55 +1372,41 @@ S'=\left\{
 Algumas imagens foram adicionadas a esse trabalho para ilustrar o resultado da Equação \ref{eq:elevarS}. A Figura \ref{fig:figuraElevarS} apresenta o resultado dessa equação com $z=3$. A Figura \ref{fig:figuraElevarSeV} apresenta a imagem resultante dos processamentos das Equações \ref{eq:elevarV} e \ref{eq:elevarS}, com $z = 3$ e $x = 3$. A Figura \ref{fig:figuraElevarSeI} apresenta a imagem resultante dos processamentos das Equações \ref{eq:elevarI} e \ref{eq:elevarS}, com $z = 3$ e $y = 3$.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraElevarS.jpg}
+\centering \includegraphics[width=0.80\textwidth]{figuraElevarS.jpg}
 \caption{Processamento da Equação \ref{eq:elevarS} sobre a Figura \ref{fig:platesIshihara}, com $z = 3$. \label{fig:figuraElevarS}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraElevarSeV.jpg}
+\centering \includegraphics[width=0.80\textwidth]{figuraElevarSeV.jpg}
 \caption{Processamento das Equações \ref{eq:elevarS} e \ref{eq:elevarV} sobre a Figura \ref{fig:platesIshihara}, com $z = 3$ e $x = 3$. \label{fig:figuraElevarSeV}}
 \end{figure}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.90\textwidth]{figuraElevarSeI.jpg}
+\centering \includegraphics[width=0.80\textwidth]{figuraElevarSeI.jpg}
 \caption{Processamento das Equações \ref{eq:elevarS} e \ref{eq:elevarI} sobre a Figura \ref{fig:platesIshihara}, com $z = 3$ e $y = 3$. \label{fig:figuraElevarSeI}}
 \end{figure}
 
-\subsection{Sistema HSV}
-\label{subsec:alterarValues} 
+Os resultados obtidos com os processamentos que utilizam o sistema de cores HSI também não foram satisfatórios. Ao contrário dos resultados obtidos com os processamentos apresentados nesta Subseção utilizando o sistema de cores HSV.
 
-\subsection{Sistema HSI}
+Com o sistema HSV, os processamentos descritos nas Equações \ref{eq:elevarV} e \ref{eq:elevarS} resultaram em imagens as quais os números contidos nas pranchas de Ishihara são facilmente identificados pelo proponente deste trabalho, que é portador de daltonismo. Afim de verificar se o mesmo ocorre com outras pessoas daltônicas, um site foi desenvolvido para obter opiniões de daltônicos sobre o processamento realizado sobre o sistema HSV, o qual foi descrito nessa Subseção.
 
-O sistema de cores HSI é semelhante ao sistema de cores HSV, por isso todos os processamentos realizados no sistema de cores HSV podem ser facilmente modificados para o sistema HSI.
+A Figura \ref{fig:figuraRealVeS} apresenta os resultados da aplicação dos processamentos descritos nas Equações \ref{eq:elevarV} e \ref{eq:elevarS} em fotografias reais, com $x = 2$ e $z = 2$.
 
-Sendo assim, foram modificados os algoritmos desenvolvidos para o sistema de cores HSV e abaixo podemos ver o resultado para algumas pranchas de Ishihara.
-
-Inserir imagens
-
-Inserir imagens
-
-Inserir imagens
-
-Inserir imagens
-
-Inserir imagens
-
-Inserir imagens
-
-Comparar o resultado do processamento de imagem entre os sistemas de cores HSI e HSV.
-
-\subsection{Sistema LMS}
-
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.80\textwidth]{figuraRealSeV.jpg}
+\caption{Processamento das Equações \ref{eq:elevarS} e \ref{eq:elevarV} sobre imagens reais, com $z = 2$ e $y = 2$. \label{fig:figuraRealVeS}}
+\end{figure}
 
 \section{Ferramenta}
 
-Para obter resultados das pessoas daltônicas, foi criado um site utilizando a plataforma \citeonline{googleappengine2015}. Essa plataforma utiliza o conceito de nuvem e é classificada como PaaS (Plataforma como um serviço, do inglês Platform as a Service). É possível utilizar as linguagens de programação Python, Java, PHP ou GO para desenvolver aplicativos que serão hospedados no Google App Engine. Devido a experiência do proponente com a linguagem de programação Java, essa foi a linguagem de programação escolhida para o desenvolvimento do site. 
 
-Para salvar as informações geradas através do uso da aplicação por usuários, foi utilizado o banco de dados do Google App Engine. Esse banco de dados utiliza o conceito NoSQL. Afim de facilitar a programação para acesso, alteração e armazenamento nesse banco de dados, foi utilizada a API (Interface de Programação de Aplicativos, do inglês Application Programming Interface) para acesso de dados chamada \citeonline{objectify2015}.
+Afim de obter os melhores parâmetros para os escalares que são utilizados nas multiplicações das Equações \ref{eq:elevarS} e \ref{eq:elevarV}, foi criado um site utilizando a plataforma \citeonline{googleappengine2015}. Essa plataforma utiliza o conceito de nuvem e é classificada como PaaS (Plataforma como um serviço, do inglês Platform as a Service). É possível utilizar as linguagens de programação Python, Java, PHP ou GO para desenvolver aplicativos que serão hospedados no Google App Engine. Devido a experiência do proponente com a linguagem de programação Java, essa foi a linguagem de programação escolhida para o desenvolvimento do site. 
 
-Para facilitar a criação do layout da aplicação, foi utilizado o framework \citeonline{Bootstrap}. Com esse framework, é possível criar a interface com o usuário mais rápido e mais facilmente do que sem ele.
+Para armazenar as informações geradas através do uso da aplicação pelos usuários, foi utilizado o banco de dados do Google chamado Datastore \cite{googleclouddatastore}. Esse banco de dados utiliza o conceito NoSQL e os dados também ficam armazenados em nuvem. Assim como as informações da aplicação, o banco de dados pode ser acessado através do site http://appengine.google.com/ após realizar login com a conta do Google.
 
-A ferramenda possui quatro telas principais, são elas:
+Afim de facilitar a programação para acessar ou incluir os dados no Datastore, foi utilizada a API (Interface de Programação de Aplicativos, do inglês Application Programming Interface) para acesso de dados chamada \citeonline{objectify2015}. Outro framework utilizado para facilitar a programação foi o \citeonline{Bootstrap}. No entanto, o Bootstrap facilita a manipulação do layout da aplicação.
+
+O site possui as quatro telas abaixo:
 
 \begin{itemize}
 \item Teste original;
@@ -1367,46 +1418,41 @@ A ferramenda possui quatro telas principais, são elas:
 Abaixo são apresentados detalhes de cada uma dessas telas.
 
 \subsection{Teste original}
-O teste original utiliza as 21 pranchas de Ishihara que estão na Figura \ref{fig:figuraTesteOriginalFerramenta}. Nesse teste, o usuário deve digitar o número visto em cada uma das imagens e no final é apresentado o resultado do teste. 
+O teste original utiliza as 21 pranchas de Ishihara que estão na Figura \ref{fig:platesIshihara}. Nesse teste, o usuário deve digitar o número visto em cada uma das imagens e no final é apresentado o resultado do teste. 
 
-Foi percebido que o contraste do dispositivo utilizado para a realização do teste influencia no resultado. Por esse e por outros motivos, não é possível definir se uma pessoa é daltônica somente após a realização do teste de Ishihara. No entanto, juntamente com o resultado do teste, é apresentado ao usuário se com base no resultado do teste ele possui indício de ser daltônico. Também é apresentada uma mensagem ao usuário recomendando a procura de um especialista para um diagnóstico preciso.
+Foi percebido que o contraste do dispositivo utilizado para a realização do teste influencia no resultado. Por esse e por outros motivos, não é possível definir se uma pessoa é daltônica somente após a realização do teste de Ishihara. No entanto, juntamente com a quantidade de acertos, é apresentado ao usuário com base no resultado do teste se ele possui indícios de ser daltônico. Também é apresentada uma mensagem ao usuário recomendando a procura de um especialista para um diagnóstico preciso.
+
+A Figura \ref{fig:telaTesteOriginal} apresenta a tela do teste original e a Figura \ref{fig:telaResultadoOriginalErro} apresenta o resultado caso o usuário não acerte todas as alternativas e a Figura \ref{fig:telaResultadoOriginal} caso acerte todas as alternativas.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.9\textwidth]{platesIshihara.png}
-\caption{Pranchas utilizadas no teste de Ishihara da Ferramenta. (adaptado de \citeonline{colorblindnesssite})} \label{fig:figuraTesteOriginalFerramenta}
+\centering \includegraphics[width=0.8\textwidth]{telaTesteOriginal.jpg}
+\caption{Página com o teste original.} \label{fig:telaTesteOriginal}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.8\textwidth]{telaResultadoOriginalErro.jpg}
+\caption{Página com o resultado do teste original com erros.} \label{fig:telaResultadoOriginalErro}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.8\textwidth]{telaResultadoOriginal.jpg}
+\caption{Página com o resultado do teste original sem erros.} \label{fig:telaResultadoOriginal}
 \end{figure}
 
 
 \subsection{Teste modificado}
 
-Essa página é composta pelo teste de Ishihara com as suas imagens modificadas. As modificações foram feitas conforme o processamento de imagens descrito na Subseção \ref{subsec:alterarValues}, a qual utiliza o sistema de cores HSV.
+Essa página é composta pelo teste de Ishihara com as suas imagens modificadas. As modificações foram feitas conforme o processamento de imagens que utiliza as Equações \ref{eq:elevarS} e \ref{eq:elevarV}.
 
-Os parâmetros para o algoritmo desenvolvido para a realização desse processamento são controlados através de barras de controle e caixas de seleção, conforme é possível visualizar na Figura \ref{fig:figuraParametrosTeste}.
-
-As caixas de seleção Verde, Vermelho e azul.................................................. .................................................. .................................................. .................................................. .................................................. ..................................................
-
-A barra de controle cores..................................................
-..................................................
-..................................................
-0 significa XXXXXXX, 1 significa YYYYYYY, 2 significa QQQQQQQQQ,
-3 significa XXXXXXX, 4 significa YYYYYYY, 5 significa QQQQQQQQQ,
-
-A barra de controle saturação..................................................
-..................................................
-..................................................
-0 significa XXXXXXX, 1 significa YYYYYYY, 2 significa QQQQQQQQQ,
-3 significa XXXXXXX, 4 significa YYYYYYY, 5 significa QQQQQQQQQ,
-
-A barra de controle intensidade..................................................
-..................................................
-..................................................
-0 significa XXXXXXX, 1 significa YYYYYYY, 2 significa QQQQQQQQQ,
-3 significa XXXXXXX, 4 significa YYYYYYY, 5 significa QQQQQQQQQ,
+Os parâmetros do algoritmo desenvolvido para a realização desse processamento são controlados através de barras de controle e botões de seleção, conforme é possível visualizar na Figura \ref{fig:figuraParametrosTeste}. 
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.6\textwidth]{platesIshihara.png}
-\caption{Alterar imagem} \label{fig:figuraParametrosTeste}
+\centering \includegraphics[width=0.8\textwidth]{figuraParametrosCalibracao.jpg}
+\caption{Parâmetros de calibração para para o processamento.} \label{fig:figuraParametrosTeste}
 \end{figure}
+
+
+
 
 \subsection{Pesquisa}
 
