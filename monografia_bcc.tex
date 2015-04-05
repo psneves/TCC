@@ -66,7 +66,7 @@
 \titulo{Ferramenta para auxiliar daltônicos a distinguir cores}
 \autor{Paulo Sérgio de Souza Neves}
 \local{São José dos Campos, SP}
-\data{Novembro de 2014}
+\data{Abril de 2015}
 \orientador{Profa. Dra. Ana Luísa Dine Martins Lemos}
 
 %\coorientador{Prof. Dr. Beltrano da Silva}
@@ -177,12 +177,12 @@
     \vspace*{\fill}
    \end{center}
     
-   Trabalho aprovado em 02 de Dezembro de 2014:
+   Trabalho aprovado em 24 de Abril de 2014:
 
    \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
    \assinatura{\textbf{Professor} \\ Convidado 1}
    \assinatura{\textbf{Professor} \\ Convidado 2}
-   \assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
    %\assinatura{\textbf{Professor} \\ Convidado 4}
       
    \begin{center}
@@ -1087,7 +1087,7 @@ $330^o$             & Rosa          \\ \hline
 \end{table}
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.60\textwidth]{figuraColorsH.PNG}
+\centering \includegraphics[width=0.40\textwidth]{figuraColorsH.PNG}
 \caption{Matiz dos sistemas de cores HSI e HSV. (adaptado de \citeonline{onextrapixel}) \label{fig:figuraColorsH}}
 \end{figure}
 
@@ -1317,16 +1317,53 @@ A Figura \ref{fig:deslocamento240} exibe o resultado do processamento da Equaç�
 \caption{Processamento da Equação \ref{eq:deslocarH240} sobre a Figura \ref{fig:platesIshihara}. \label{fig:deslocamento240}}
 \end{figure}
 
+O resultado do processamento obtido nessa Subseção não abstrai os valores de H. Com isso, nenhuma característica das imagens é perdida. Com esse processamento, os números das pranchas de Ishihara foram identificados nas Figuras \ref{fig:deslocamento120} e \ref{fig:deslocamento240} pelo proponente. Afim de verificar se o mesmo ocorre com outros daltônicos, esse processamento será integrado a ferramenta desenvolvida.
+
+Aplicando o processamento descrito nas Equações \ref{eq:deslocarH120} \ref{eq:deslocarH240} sobre a imagem original da Figura \ref{fig:figuraSimulador}, é possível observar que as características da imagem são preservadas, apesar de serem apresentadas em outras cores. Para essa imagem, as características também podem ser observadas por daltônicos do tipo protanopia e deuteranopia, conforme é possível verificar aplicando a simulação de daltonismo. A Figura \ref{fig:figuraSimulacaoH} ilustra essas observações.
+
+\begin{figure}[!htb]
+\minipage{0.30\textwidth}
+\centering
+{\includegraphics[width=\linewidth]{figuraPimenta120.png}}
+(a)
+\endminipage\hfill
+\minipage{0.30\textwidth}
+\centering
+{\includegraphics[width=\linewidth]{figuraPimenta120Protan.png}}
+(b)
+\endminipage\hfill
+\minipage{0.30\textwidth}
+\centering
+{\includegraphics[width=\linewidth]{figuraPimenta120Deutran.png}}
+(c)
+\endminipage\hfill
 
 
-\ref{tab:coresEmH}
+\minipage{0.30\textwidth}
+\centering
+{\includegraphics[width=\linewidth]{figuraPimenta240.png}}
+(a)
+\endminipage\hfill
+\minipage{0.30\textwidth}
+\centering
+{\includegraphics[width=\linewidth]{figuraPimenta240Protan.png}}
+(b)
+\endminipage\hfill
+\minipage{0.30\textwidth}
+\centering
+{\includegraphics[width=\linewidth]{figuraPimenta240Deutran.png}}
+(c)
+\endminipage\hfill
+\caption{Resultado da correção da imagem (a) com equalização (b) e sem equalização (c). (adaptado de \citeonline{jlee2008})}
+\label{fig:figuraSimulacaoH}
+\end{figure}
 
 \subsection{Elevar os valores da saturação, intensidade ou valor}
 \label{subsec:deslocarVouI}
 
 Assim como o processamento apresentado na Subseção \ref{subsec:eliminarIntervalosH}, esse processamento é iniciado com a conversão de uma imagem RGB para o sistema de cores HSV ou HSI, após essa conversão outro processamento é realizado no sistema de cores HSV ou HSI e por fim a imagem é convertida de volta para o sistema de cores RGB. As conversões entre os sistemas de cores não são descritas nos processamentos apresentados, entende-se que elas são obrigatórias para todos os processamentos descritos neste trabalho.
 
-A ideia básica desse processamento é simples, ela consiste em multiplicar os valores de V ou I por um escalar. Quanto maior esse escalar, mais vibrante ou intensa a cor. Porém, é necessário verificar se o resultado dessa multiplicação não é maior do que o maior valor permitido para os elementos de V ou I, ou seja, se não é maior do que $1$. Para o sistema de cores HSV, esse processamento é descrito na Equação \ref{eq:elevarV}, onde o escalar é representado pela letra $x$, e para o sistema de cores HSI o processamento é descrito na Equação \ref{eq:elevarI}, onde o escalar é representado por $y$.
+A ideia básica desse processamento consiste em multiplicar os valores de V ou I por um escalar. Quanto maior esse escalar, mais vibrante ou intensa a cor. Porém, é necessário verificar se o resultado dessa multiplicação não é maior do que o maior valor permitido para os elementos de V ou I, ou seja, se não é maior do que $1$. Para o sistema de cores HSV, esse processamento é descrito na Equação \ref{eq:elevarV}, onde o escalar é representado pela letra $x$, e para o sistema de cores HSI o processamento é descrito na Equação \ref{eq:elevarI}, onde o escalar é representado por $y$.
 
 \begin{equation}
 \label{eq:elevarV}
@@ -1399,8 +1436,7 @@ A Figura \ref{fig:figuraRealVeS} apresenta os resultados da aplicação dos proc
 
 \section{Ferramenta}
 
-
-Afim de obter os melhores parâmetros para os escalares que são utilizados nas multiplicações das Equações \ref{eq:elevarS} e \ref{eq:elevarV}, foi criado um site utilizando a plataforma \citeonline{googleappengine2015}. Essa plataforma utiliza o conceito de nuvem e é classificada como PaaS (Plataforma como um serviço, do inglês Platform as a Service). É possível utilizar as linguagens de programação Python, Java, PHP ou GO para desenvolver aplicativos que serão hospedados no Google App Engine. Devido a experiência do proponente com a linguagem de programação Java, essa foi a linguagem de programação escolhida para o desenvolvimento do site. 
+Com o objetivo de validar se os processamentos descritos nas Subseções \ref{subsec:deslocarMatiz} e \ref{subsec:deslocarVouI}, foi criado um site utilizando a plataforma \citeonline{googleappengine2015}. Essa plataforma utiliza o conceito de nuvem e é classificada como PaaS (Plataforma como um serviço, do inglês Platform as a Service). É possível utilizar as linguagens de programação Python, Java, PHP ou GO para desenvolver aplicativos que serão hospedados no Google App Engine. Devido a experiência do proponente com a linguagem de programação Java, essa foi a linguagem de programação escolhida para o desenvolvimento do site. 
 
 Para armazenar as informações geradas através do uso da aplicação pelos usuários, foi utilizado o banco de dados do Google chamado Datastore \cite{googleclouddatastore}. Esse banco de dados utiliza o conceito NoSQL e os dados também ficam armazenados em nuvem. Assim como as informações da aplicação, o banco de dados pode ser acessado através do site http://appengine.google.com/ após realizar login com a conta do Google.
 
