@@ -1263,7 +1263,7 @@ Esse método desloca todos os valores da matiz H. Com isso, todos os valores de 
 \label{eq:deslocarH120}
 H'=\left\{
 \begin{array}{rl}
-       H + 120^o,   &\mbox{se}  H < 240^o \\
+       H + 120^o,   &\mbox{se}\quad  H < 240^o \\
        H - 240^o,   &\mbox{caso contrário} \\
 \end{array}\right.
 \end{equation}
@@ -1272,7 +1272,7 @@ H'=\left\{
 \label{eq:deslocarH240}
 H'=\left\{
 \begin{array}{rl}
-       H + 240^o,   &\mbox{se}  H < 120^o \\
+       H + 240^o,   &\mbox{se}\quad  H < 120^o \\
        H - 120^o,   &\mbox{caso contrário} \\
 \end{array}\right.
 \end{equation}
@@ -1319,7 +1319,7 @@ A Figura \ref{fig:deslocamento240} exibe o resultado do processamento da Equaç�
 
 O resultado do processamento obtido nessa Subseção não abstrai os valores de H. Com isso, nenhuma característica das imagens é perdida. Com esse processamento, os números das pranchas de Ishihara foram identificados nas Figuras \ref{fig:deslocamento120} e \ref{fig:deslocamento240} pelo proponente. Afim de verificar se o mesmo ocorre com outros daltônicos, esse processamento será integrado a ferramenta desenvolvida.
 
-Aplicando o processamento descrito nas Equações \ref{eq:deslocarH120} \ref{eq:deslocarH240} sobre a imagem original da Figura \ref{fig:figuraSimulador}, é possível observar que as características da imagem são preservadas, apesar de serem apresentadas em outras cores. Para essa imagem, as características também podem ser observadas por daltônicos do tipo protanopia e deuteranopia, conforme é possível verificar aplicando a simulação de daltonismo. A Figura \ref{fig:figuraSimulacaoH} ilustra essas observações.
+Aplicando o processamento descrito nas Equações \ref{eq:deslocarH120} e \ref{eq:deslocarH240} sobre a imagem original da Figura \ref{fig:figuraSimulador}, é possível observar que os objetos da imagem são apresentados em outras cores, mas nenhuma abstração é realizada. Para as imagens resultantes dos processamentos realizados, as características também podem ser observadas por daltônicos do tipo protanopia e deuteranopia, conforme é possível verificar aplicando a simulação de daltonismo. A Figura \ref{fig:figuraSimulacaoH} apresenta as imagens processadas e as imagens resultantes da simulação para os tipos protanopia e deuteranopia, nas imagens simuladas é possível verificar que os daltônicos com esses tipos de deficiência conseguem visualizar que a cor da pimenta é diferente da cor do galho onde a pimenta se encontra. Isso não acontece na simulação de daltonismo para a imagem original, conforme se pode verificar na Figura \ref{fig:figuraSimulador}.
 
 \begin{figure}[!htb]
 \minipage{0.30\textwidth}
@@ -1342,19 +1342,21 @@ Aplicando o processamento descrito nas Equações \ref{eq:deslocarH120} \ref{eq:
 \minipage{0.30\textwidth}
 \centering
 {\includegraphics[width=\linewidth]{figuraPimenta240.png}}
-(a)
+(d)
 \endminipage\hfill
 \minipage{0.30\textwidth}
 \centering
 {\includegraphics[width=\linewidth]{figuraPimenta240Protan.png}}
-(b)
+(e)
 \endminipage\hfill
 \minipage{0.30\textwidth}
 \centering
 {\includegraphics[width=\linewidth]{figuraPimenta240Deutran.png}}
-(c)
+(f)
 \endminipage\hfill
-\caption{Resultado da correção da imagem (a) com equalização (b) e sem equalização (c). (adaptado de \citeonline{jlee2008})}
+\caption{
+(a) Aplicação da Equação \ref{eq:deslocarH120} sobre a imagem original da Figura \ref{fig:figuraSimulador}. (b) Simulação de protanopia sobre a imagem (a). (c) Simulação de deuteranopia sobre a imagem (a). (d) Aplicação da Equação \ref{eq:deslocarH240} sobre a imagem original da Figura \ref{fig:figuraSimulador}. (e) Simulação de protanopia sobre a imagem (d).
+(f) Simulação de deuteranopia sobre a imagem (d). (adaptado de \citeonline{jlee2008})}
 \label{fig:figuraSimulacaoH}
 \end{figure}
 
@@ -1442,12 +1444,13 @@ Para armazenar as informações geradas através do uso da aplicação pelos usu
 
 Afim de facilitar a programação para acessar ou incluir os dados no Datastore, foi utilizada a API (Interface de Programação de Aplicativos, do inglês Application Programming Interface) para acesso de dados chamada \citeonline{objectify2015}. Outro framework utilizado para facilitar a programação foi o \citeonline{Bootstrap}. No entanto, o Bootstrap facilita a manipulação do layout da aplicação.
 
-O site possui as quatro telas abaixo:
+O site possui as cinco telas abaixo:
 
 \begin{itemize}
 \item Teste original;
 \item Teste modificado;
 \item Pesquisa;
+\item Download;
 \item Sobre.
 \end{itemize}
 
@@ -1477,6 +1480,7 @@ A Figura \ref{fig:telaTesteOriginal} apresenta a tela do teste original e a Figu
 
 
 \subsection{Teste modificado}
+\label{subsec:testeModificado}
 
 Essa página é composta pelo teste de Ishihara com as suas imagens modificadas. As modificações foram feitas conforme o processamento de imagens que utiliza as Equações \ref{eq:elevarS} e \ref{eq:elevarV}.
 
@@ -1484,36 +1488,66 @@ Os parâmetros do algoritmo desenvolvido para a realização desse processamento
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.8\textwidth]{figuraParametrosCalibracao.jpg}
-\caption{Parâmetros de calibração para para o processamento.} \label{fig:figuraParametrosTeste}
+\caption{Parâmetros de calibração para o processamento.} \label{fig:figuraParametrosTeste}
 \end{figure}
 
+Se $0^o$ for escolhido para o parâmetro girar, nada acontece com a matiz da imagem no sistema de cores HSV. No entanto, se o valor $120^o$ for escolhido, o valor da matiz é alterado aplicando a Equação \ref{eq:deslocarH120}. Analogamente, se o valor $240^o$ for escolhido, o valor da matiz é alterado aplicando a Equação \ref{eq:deslocarH240}.
+
+Os parâmetros Saturação e Intensidade definem os valores das constantes $z$ e $x$ que serão utilizados nas Equações \ref{eq:elevarS} e \ref{eq:elevarV}, respectivamente, para alterar os valores das matrizes S e V do sistema de cores HSV. As opções de parâmetros são de 0 à 5, mas esses não são os valores de $z$ e $x$. Os valores de $z$ e $x$ são definidos conforme a Tabela \ref{tab:parametrosCalibracao}.
 
 
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccc}
+\hline      
+\textbf{Valor escolhido} & \textbf{Saturação} & \textbf{Intensidade}     \\ \hline
+0                        & $z = 1$            &  $x = 1$                          \\ \hline
+1                        & $z = 1.2$          &  $x = 1.2$                          \\ \hline
+2                        & $z = 1.4$          &  $x = 1.4$                          \\ \hline 
+3                        & $z = 1.8$          &  $x = 1.8$                          \\ \hline
+4                        & $z = 2.5$          &  $x = 2.5$                            \\ \hline
+5                        & $z = 5$            &  $x = 5$                           \\ \hline
+
+
+\end{tabular}
+\caption{Valores de $z$ e $x$ para as Equações \ref{eq:elevarS} e \ref{eq:elevarV} conforme parâmetros escolhidos para o teste modificado.}
+\label{tab:parametrosCalibracao}
+\end{table}
 
 \subsection{Pesquisa}
 
 Essa página é composta por um formulário que foi utilizado para obter informações adicionais dos usuários, com o objetivo de fortalecer os argumentos da conclusão sobre a ferramenta. Quando um usuário responde o formulário, as respostas vão para o banco de dados do Google App Engine, atreladas ao e-mail do usuário que respondeu as perguntas.
 
 
-As perguntas contidas nesse formulário são....
+Neste formulário, o usuário precisa informar seu nome, sexo e se é daltônico. Se ele for daltônico, ele pode informar quais são as cores que ele possui dificuldade de enxergar. Depois de informar essas informações, o usuário precisar alterar os parâmetros de calibração para que seja possível identificar todos os números de Ishihara na Figura \ref{fig:platesIshihara}. Conforme os parâmetros são alterados, a imagem exibida é alterada, seguindo a mesma lógica apresentada na Subseção \ref{subsec:testeModificado} para alterar as imagens. No entanto, para essa página, os valores dos parâmetros Saturação e Intensidade assume valores de 0 a 10 e os valores paras as Equações \ref{eq:elevarS} e \ref{eq:elevarV} são definidos conforme a Tabela \ref{tab:parametrosPesquisa}. 
 
-1
+\begin{table}[ht]
+\centering
+\begin{tabular}{cccc}
+\hline      
+\textbf{Valor escolhido} & \textbf{Saturação} & \textbf{Intensidade}     \\ \hline
+0                        & $z = 1$            &  $x = 1$                          \\ \hline
+1                        & $z = 1.2$          &  $x = 1.2$                          \\ \hline
+2                        & $z = 1.4$          &  $x = 1.4$                          \\ \hline 
+3                        & $z = 1.7$          &  $x = 1.7$                          \\ \hline
+4                        & $z = 2$            &  $x = 2$                            \\ \hline
+5                        & $z = 2.5$          &  $x = 2.5$                           \\ \hline
+6                        & $z = 3$            &  $x = 3$                           \\ \hline
+7                        & $z = 4$            &  $x = 4$                           \\ \hline
+8                        & $z = 6$            &  $x = 6$                           \\ \hline
+9                        & $z = 8$            &  $x = 8$                           \\ \hline
+10                       & $z = 10.0$         &  $x = 10$                           \\ \hline
 
-2
+\end{tabular}
+\caption{Valores de $z$ e $x$ para as Equações \ref{eq:elevarS} e \ref{eq:elevarV} conforme parâmetros escolhidos para a pesquisa.}
+\label{tab:parametrosPesquisa}
+\end{table}
 
-3
+O objetivo é que o usuário altere os parâmetros o mínimo possível. Para isso, existe um valor que é apresentado na tela conforme ele altera os parâmetros. Esse valor é alterado quando qualquer um dos parâmetros é modificado e ele é formado pela soma dos valores escolhidos nos parâmetros Saturação de Intensidade. Além disso, caso o usuário escolha deslocar os valores da matiz em $120^o$ ou $240^o$, o valor resultante da soma desses dois parâmetros é incrementado em 10.
 
-4
+Por fim, o usuário responde se conseguiu visualizar todos os números na imagem após alterar os parâmetros. Essa informação só é válida caso o usuário seja daltônico, porque usuários que não são daltônicos deveriam visualizar todos os números nas pranchas sem alterar nenhum parâmetro.
 
-5
-
-6
-
-7
-
-8
-
-9
+\subsection{Download}
 
 \subsection{Sobre}
 
@@ -1522,7 +1556,7 @@ Nenhum ação do usuário é esperada nessa tela. Ela possui o objetivo de infor
 É possível visualizar as informações apresentadas nessa tela na Figura \ref{fig:figuraSobre}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.6\textwidth]{platesIshihara.png}
+\centering \includegraphics[width=0.6\textwidth]{figuraSobre.png}
 \caption{Alterar imagem} \label{fig:figuraSobre}
 \end{figure}
 
