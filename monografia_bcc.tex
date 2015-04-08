@@ -604,13 +604,13 @@ H=\left\{\begin{array}{rc}
 
 sendo,
 \begin{equation}
-\delta = arccos \left( \frac{(R - G) + (R - B)}{2  \times  \sqrt{(R-G)^2 + (R-B)(G-B)} } \right)
+\delta = arccos \left( \frac{(R - G) + (R - B)}{2  .  \sqrt{(R-G)^2 + (R-B)(G-B)} } \right)
 \end{equation}
  
 A saturação representa a quantidade de cor pura na coordenada e pode ser obtida por: 
 
 \begin{equation}
-S = 1 -  \frac{3 \times min(R, G, B)}{(R+G+B)} 
+S = 1 -  \frac{3 . min(R, G, B)}{(R+G+B)} 
 \end{equation}
 
 A intensidade corresponde a quantidade de brilho relativo na coordenada e pode ser obtida por:
@@ -624,16 +624,16 @@ I = \frac{R+G+B}{3}
 Se $0^o \leq H < 120^o$, então
 
 \begin{equation}
-B=I \times (1-S)
+B=I . (1-S)
 \end{equation}
 
 \begin{equation}
-R=I  \times \left( 1 +  \frac{S \times cosH}{cos (60^o - H)} \right)
+R=I  . \left( 1 +  \frac{S . cosH}{cos (60^o - H)} \right)
 \end{equation}
 
  e
 \begin{equation}
-G=3 \times I - (R+B).
+G=3 . I - (R+B).
 \end{equation}
 
 Se $120^o \leq H < 240^o$, devemos subtrair $120^o$ de H:
@@ -645,17 +645,17 @@ H=H-120^o
 e obter os componentes RGB através das equações
 
 \begin{equation}
-R=I \times (1-S)
+R=I . (1-S)
 \end{equation}
 
 \begin{equation}
-G=I  \times \left( 1 +  \frac{S \times cosH}{cos (60^o - H)} \right)
+G=I  . \left( 1 +  \frac{S . cosH}{cos (60^o - H)} \right)
 \end{equation}
 
 e
 
 \begin{equation}
-B=3 \times I-(R+G).
+B=3 . I-(R+G).
 \end{equation}
 
 Por fim, se $240^0 \leq H \leq 360^o$, devemos subtrair $240^o$ de H:
@@ -667,17 +667,17 @@ H=H-240^o
 e obter os componentes RGB através das equações
 
 \begin{equation}
-G=I \times (1-S)
+G=I . (1-S)
 \end{equation}
 
 \begin{equation}
-B=I  \times \left( 1 +  \frac{S \times cosH}{cos (60^o - H)} ) \right)
+B=I  . \left( 1 +  \frac{S . cosH}{cos (60^o - H)} ) \right)
 \end{equation}
 
 e
 
 \begin{equation}
-R=3 \times I-(G+B).
+R=3 . I-(G+B).
 \end{equation}
 
 As Figuras \ref{fig:figuraCuboRGB}, \ref{fig:figuraComponentesHSI} e \ref{fig:figuraComponentesHSI2} ilustram imagens no sistema RGB e no sistema HSI, para que seja possível compreender melhor o que cada um dos parâmetros do sistema HSI representa em uma imagem. Cada Figura é composta pela imagem no sistema RGB e as componentes matiz, saturação e intensidade da imagem.
@@ -760,9 +760,9 @@ H=\left\{
 \begin{array}{rc}
 
     0^o,&\mbox{se}\quad S = 0 \\
-    \frac{60^o \times (g-b)}{S \times V},&\mbox{se}\quad V=r \\
-    60^o \times \left( 2 + \frac{(b-r)}{S \times V} \right),&\mbox{se}\quad V=g \\
-    60^o \times \left( 4 + \frac{(r-g)}{S \times V} \right),&\mbox{se}\quad V=r
+    \frac{60^o . (g-b)}{S . V},&\mbox{se}\quad V=r \\
+    60^o . \left( 2 + \frac{(b-r)}{S . V} \right),&\mbox{se}\quad V=g \\
+    60^o . \left( 4 + \frac{(r-g)}{S . V} \right),&\mbox{se}\quad V=r
 
 \end{array}\right.
 \end{equation}
@@ -801,17 +801,17 @@ A conversão do sistema HSV para o sistema RGB é realizada através das Equaç�
 
 \begin{equation}
 \label{eq:hsv2rgbX}
-    X = V \times (1 - S)
+    X = V . (1 - S)
 \end{equation}
 
 \begin{equation}
 \label{eq:hsv2rgbY}
-    Y = V \times (1 - S \times T)
+    Y = V . (1 - S . T)
 \end{equation}
 
 \begin{equation}
 \label{eq:hsv2rgbZ}
-    Z = V \times (1 - S \times (1 - T))
+    Z = V . (1 - S . (1 - T))
 \end{equation}
 
 \begin{equation}
@@ -1371,7 +1371,7 @@ A ideia básica desse processamento consiste em multiplicar os valores de V ou I
 \label{eq:elevarV}
 V'=\left\{
 \begin{array}{rl}
-       $x$ \times V,&\mbox{se}\quad $x$ \times V < 1 \\
+       $x$ . V,&\mbox{se}\quad $x$ . V < 1 \\
        1,&\mbox{caso contrário}
 \end{array}\right.
 \end{equation}
@@ -1380,7 +1380,7 @@ V'=\left\{
 \label{eq:elevarI}
 I'=\left\{
 \begin{array}{rl}
-       $y$ \times I,&\mbox{se}\quad $y$ \times I < 1 \\
+       $y$ . I,&\mbox{se}\quad $y$ . I < 1 \\
        1,&\mbox{caso contrário}
 \end{array}\right.
 \end{equation}
@@ -1403,7 +1403,7 @@ Para tornar as cores das imagens ainda mais vibrantes e intensas, também foi im
 \label{eq:elevarS}
 S'=\left\{
 \begin{array}{rl}
-       $z$ \times S,&\mbox{se}\quad $z$ \times S < 1 \\
+       $z$ . S,&\mbox{se}\quad $z$ . S < 1 \\
        1,&\mbox{caso contrário}
 \end{array}\right.
 \end{equation}
@@ -1559,6 +1559,11 @@ Nenhum ação do usuário é esperada nessa tela. Ela possui o objetivo de infor
 \centering \includegraphics[width=0.6\textwidth]{figuraSobre.png}
 \caption{Alterar imagem} \label{fig:figuraSobre}
 \end{figure}
+
+% ---
+% Resultados
+% ---
+\chapter{Resultados}
 
 % ---
 % Conclusão
