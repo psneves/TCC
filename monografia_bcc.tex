@@ -1494,7 +1494,7 @@ As Figuras \ref{fig:telaResultadoOriginalErro} e \ref{fig:telaResultadoOriginal}
 \subsection{Teste modificado}
 \label{subsec:testeModificado}
 
-Essa página é composta pelo teste de Ishihara com as suas imagens modificadas. As modificações foram feitas conforme o processamento de imagens que utiliza as Equações \ref{eq:elevarS} e \ref{eq:elevarV}.
+Esta página é composta pelo teste de Ishihara com as suas imagens modificadas. As modificações foram feitas conforme o processamento de imagens que utiliza as Equações \ref{eq:deslocarH120}, \ref{eq:deslocarH240}. \ref{eq:elevarS} ou \ref{eq:elevarV}, ou seja, os processamentos que deslocam os valores da matiz e os que realçam os valores de S e V no sistema de cor HSV.
 
 Os parâmetros do algoritmo desenvolvido para a realização desse processamento são controlados através de barras de controle e botões de seleção, conforme é possível visualizar na Figura \ref{fig:figuraParametrosTeste}. 
 
@@ -1505,7 +1505,7 @@ Os parâmetros do algoritmo desenvolvido para a realização desse processamento
 
 Se $0^o$ for escolhido para o parâmetro girar, nada acontece com a matiz da imagem no sistema de cores HSV. No entanto, se o valor $120^o$ for escolhido, o valor da matiz é alterado aplicando a Equação \ref{eq:deslocarH120}. Analogamente, se o valor $240^o$ for escolhido, o valor da matiz é alterado aplicando a Equação \ref{eq:deslocarH240}.
 
-Os parâmetros Saturação e Intensidade definem os valores das constantes $z$ e $x$ que serão utilizados nas Equações \ref{eq:elevarS} e \ref{eq:elevarV}, respectivamente, para alterar os valores das matrizes S e V do sistema de cores HSV. As opções de parâmetros são de 0 à 5, mas esses não são os valores de $z$ e $x$. Os valores de $z$ e $x$ são definidos conforme a Tabela \ref{tab:parametrosCalibracao}.
+Os parâmetros Saturação e Intensidade definem os valores das constantes $x$ e $z$ que serão utilizados nas Equações \ref{eq:elevarV} e \ref{eq:elevarS}, respectivamente, para elevar os valores dos componentes S e V do sistema de cores HSV. As opções de parâmetros que podem ser escolhidos vão de 0 à 5, mas esses não são os valores de $z$ e $x$. Com base nos valores escolhidos, os valores de $z$ e $x$ são definidos conforme a Tabela \ref{tab:parametrosCalibracao}.
 
 
 \begin{table}[ht]
@@ -1525,6 +1525,14 @@ Os parâmetros Saturação e Intensidade definem os valores das constantes $z$ e
 \caption{Valores de $z$ e $x$ para as Equações \ref{eq:elevarS} e \ref{eq:elevarV} conforme parâmetros escolhidos para o teste modificado.}
 \label{tab:parametrosCalibracao}
 \end{table}
+
+Esta tela pode ser visualizada na Figura \ref{fig:telaTesteModificado}, onde o valor escolhido para o parâmetro girar foi $0^o$ e para os parâmetros saturação e intensidade foi o valor $3$. Com isso, o valor de $x$ e $z$ será $1.8$ para os processamentos que elevam os valores dos componentes S e V.
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.8\textwidth]{telaTesteModificado.jpg}
+\caption{Tela teste modificado.} \label{fig:telaTesteModificado}
+\end{figure}
+
 
 \subsection{Pesquisa}
 \label{subsec:pesquisa}
