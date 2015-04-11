@@ -18,6 +18,10 @@
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{tikz}
 \usepackage{array} 
+%pack to write code
+\usepackage{listings}
+
+
 
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -177,11 +181,11 @@
     \vspace*{\fill}
    \end{center}
     
-   Trabalho aprovado em 24 de Abril de 2014:
+   Trabalho aprovado em 23 de Abril de 2014:
 
    \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
-   \assinatura{\textbf{Professor} \\ Convidado 1}
-   \assinatura{\textbf{Professor} \\ Convidado 2}
+   \assinatura{\textbf{Prof. Dr. Fábio Augusto Menocci Cappabianco} \\ Convidado 1}
+   \assinatura{\textbf{Prof.Dr. Fábio Fagundes Silveira} \\ Convidado 2}
    %\assinatura{\textbf{Professor} \\ Convidado 3}
    %\assinatura{\textbf{Professor} \\ Convidado 4}
       
@@ -234,7 +238,7 @@ Agradeço aos meus pais César de Paula Neves e Rosa Lina de Souza Neves por me 
 
 % resumo em português
 \begin{resumo}
-O daltonismo é uma deficiência que atinge cerca de 8\% da população masculina mundial. Raros são os casos de daltonismo em que as pessoas enxergam apenas tons de cinza, a maioria dos daltônicos enxergam as cores mas possuem dificuldade em distingui-las. Essa dificuldade de diferenciar as cores causa problemas em atividades cotidianas de pessoas portadoras de daltonismo. Com a finalidade de minimizar esses problemas, este trabalho tem como objetivo apresentar uma ferramenta para auxiliar daltônicos a diferenciarem cores.
+O daltonismo é uma deficiência que atinge cerca de 8\% da população masculina mundial. Raros são os casos de daltonismo em que as pessoas enxergam apenas tons de cinza, a maioria dos daltônicos enxergam as cores mas possuem dificuldade em distingui-las. A dificuldade de diferenciar cores pode causar problemas em atividades cotidianas de pessoas portadoras de daltonismo. Com a finalidade de minimizar esses problemas, este trabalho tem como objetivo apresentar uma ferramenta para auxiliar daltônicos a diferenciarem cores.
 
  \vspace{\onelineskip}
     
@@ -244,7 +248,7 @@ O daltonismo é uma deficiência que atinge cerca de 8\% da população masculin
 
 \begin{resumo}[Abstract]
  \begin{otherlanguage*}{english}
-Color blindness is a disability that affects about 8\% of the world male population. The color blindness cases which people see only shades of gray are rare, most color blinds see colors but they have difficulty in distinguishing them. This difficulty of differentiating the colors cause problems in everyday activities of people suffering from color blindness. For try to minimize these problems, this manual proposes the creation of a tool, which will process images for help color blinds to differentiate colors.
+Color blindness is a disability that affects about 8\% of the world male population. The color blindness cases which people see only shades of gray are rare, most color blinds see colors but they have difficulty in distinguishing them. The difficulty of differentiating colors can cause problems in daily activities of people suffering from color blindness. For try to minimize these problems, this manual proposes the creation of a tool, which will process images for help color blinds to differentiate colors.
 
 \vspace{\onelineskip}
  
@@ -278,6 +282,7 @@ Color blindness is a disability that affects about 8\% of the world male populat
   \item[HSB] Hue, Saturation and Brightness
   \item[HSI] Hue, Saturation and Intensity
   \item[HSV] Hue, Saturation and Value
+  \item[JAR] Java ARchive
   \item[LMS] Longwave, Middlewave and Shortwave
   \item[PaaS] Platform as a Service
   \item[RGB] Red, Green and Blue
@@ -856,6 +861,7 @@ Este tipo de processamento consiste em atribuir cores a uma imagem monocromátic
 O processamento de imagens coloridas pode ser dividido em duas categorias. Em uma primeira categoria estão os métodos que processam cada componente de cor (e.g. os componentes vermelho, verde e azul) de uma imagem separadamente e depois de realizar o processamento combina esses componentes para formar a imagem colorida novamente. A outra categoria realiza o processamento da imagem diretamente na imagem colorida, sem separar os seus componentes.
 
 \section{Simuladores de daltonismo}
+\label{sec:simulacao}
 
 Existe um algoritmo para simulação de daltonismo apresentado por \citeonline{Vienot1999}. Esse algoritmo utiliza o sistema de cores LMS (ondas longas, ondas médias e ondas pequenas, do inglês Longwave, Middlewave and Shortwave). A Figura \ref{fig:figuraSimulador} exibe imagens onde foram aplicados os filtros para daltônicos do tipo Protanopia e Deuteranopia. O primeiro passo desse algoritmo consiste em converter a imagem do sistema de cores RGB para o sistema LMS utilizando a multiplicação de matrizes \ref{eq:simulador1}.
 
@@ -985,7 +991,7 @@ R=imadjust (E,[0 \; 0 \; 0; 1 \; 1 \; 1],[1 \; 1 \; 1; 0 \; 0 \; 0],[2 \; 0 \; 0
 \end{figure}
 
 
-Outros trabalhos encontrados utilizam uma inteligência computacional maior para melhorar a visualização das imagens por daltônicos. \citeonline{jlee2008} apresentou no seu TCC uma sequência de processamentos de imagens para facilitar a visualização de imagens para pessoas portadoras de daltonismo. No processamento definido por ela, as componentes de cores recebem novos valores dependendo do tipo de daltonismo e utilizam como base as outras componentes de cores. Por exemplo, para os daltônicos do tipo Protanopia, os novos valores das componentes de cores verde e azul são definidos através da média entre os valores originais dessas componentes e os valores da componente vermelha, conforme a Equação \ref{eq:equacaojlee}. Também foi definido nesse trabalho uma maneira de equalizar as novas cores.
+Outros trabalhos encontrados utilizam uma inteligência computacional maior para melhorar a visualização das imagens por daltônicos. \citeonline{jlee2008} apresentou no seu TCC uma sequência de processamentos de imagens para facilitar a visualização de imagens para pessoas portadoras de daltonismo. No processamento definido por ela, os componentes de cores recebem novos valores dependendo do tipo de daltonismo e utilizam como base as outras componentes de cores. Por exemplo, para os daltônicos do tipo Protanopia, os novos valores das componentes de cores verde e azul são definidos através da média entre os valores originais desses componentes e os valores da componente vermelha, conforme a Equação \ref{eq:equacaojlee}. Também foi definido nesse trabalho uma maneira de equalizar as novas cores.
 
 \begin{equation}
 f^\prime =  (f_r, f_g^\prime, f_b^\prime), \left\{\begin{array}{rc}
@@ -1047,19 +1053,19 @@ Com a finalidade de facilitar a distinção de cores por daltônicos, \citeonlin
 
 A sequência descrita na Figura \ref{fig:figFluxoCorrecao} foi testada utilizando os sistemas de cores HSI e HSV. Foi escolhido processar as imagens nesses sistemas de cores porque eles se aproximam da maneira em que os seres humanos identificam as cores. 
 
-Com isso, todas as tentativas de processamento para alcançar o objetivo deste trabalho se resumem em converter uma imagem RGB para o sistema de cores HSI ou HSV, realizar dado processamento e converter a imagem para de volta o sistema de cores RGB. Detalhes dos processamentos de imagens realizados nesses sistemas de cores serão apresentados na Seção \ref{sec:processamentoDasImagens}.
+Com isso, todas as tentativas de processamento para alcançar o objetivo deste trabalho se resumem em converter uma imagem RGB para o sistema de cores HSI ou HSV, realizar um processamento, ou seja, alterar os valores das matrizes dos sistemas de cores HSV ou HSI, e posteriormente converter a imagem de volta o sistema de cores RGB. Detalhes dos processamentos realizados nesses sistemas de cores serão apresentados na Seção \ref{sec:processamentoDasImagens}.
 
 A ferramenta desenvolvida utiliza apenas um desses dois sistemas de cores. Inicialmente não era possível definir qual apresentaria resultado melhores, por isso foram realizados testes com ambos.
 
-\section{Processamento das imagens}
+\section{Processamentos}
 \label{sec:processamentoDasImagens}
 
-Afim de alcançar o objetivo desse trabalho, foram desenvolvidas três abordagens diferentes. A primeira tem como principal objetivo \textbf{eliminar intervalos na matiz}, a segunda \textbf{deslocar os valores da matiz} e a terceira \textbf{elevar os valores da saturação, intensidade ou valor}, utilizando o sistema de cores HSI ou HSV. Essas abordagens serão descritas com detalhes nas Subseções \ref{subsec:eliminarIntervalosH}, \ref{subsec:deslocarMatiz} e \ref{subsec:deslocarVouI}.
+Afim de alcançar o objetivo desse trabalho, foram desenvolvidas três abordagens diferentes. A primeira tem como principal objetivo \textbf{eliminar intervalos na matiz}, a segunda \textbf{deslocar os valores da matiz} e a terceira \textbf{elevar os valores da saturação, intensidade ou valor}, utilizando o sistema de cores HSI ou HSV. Essas abordagens serão descritas com detalhes nas subseções desta seção.
 
 \subsection{Eliminar intervalos na matiz}
 \label{subsec:eliminarIntervalosH}
 
-O componente H dos sistemas de cores HSI e HSV representa a matiz. A matiz é definida por um ângulo que está no intervalo $[0^o, 360^o]$. A Tabela \ref{tab:coresEmH} apresenta os ângulos de algumas cores nesse componente e a Figura \ref{fig:figuraColorsH} ilustra a posição dessas cores dentro de um círculo que representa os possíveis valores de H.
+O componente H dos sistemas de cores HSI e HSV representa a matiz. A matiz é definida por um ângulo que está no intervalo $[0^o,360^o]$. A Tabela \ref{tab:coresEmH} apresenta os ângulos de algumas cores nesse componente e a Figura \ref{fig:figuraColorsH} ilustra a posição de cada uma das cores dessa tabela dentro de um círculo que representa todos os possíveis valores de H.
 
 
 \begin{table}[ht]
@@ -1091,9 +1097,7 @@ $330^o$             & Rosa          \\ \hline
 \caption{Matiz dos sistemas de cores HSI e HSV. (adaptado de \citeonline{onextrapixel}) \label{fig:figuraColorsH}}
 \end{figure}
 
-A maioria dos daltônicos visualizam as três cores primárias (vermelho, verde e azul) mas possuem deficiência em um tipo de cone, conforme foi apresentado no Seção \ref{sec:tiposDaltonismo}. 
-
-Dado que os valores de H estão no intervalo $[0^o, 360^o]$ e que os ângulos pertencentes a H não necessitam ser inteiros, existem infinitos valores possíveis para H. Com o objetivo de facilitar a distinção de cores por daltônicos, o primeiro processamento de imagem executado neste trabalho reduz os possíveis valores de H para um conjunto finito de 3, 6 e 12 elementos.
+Dado que os valores de H estão no intervalo $[0^o,360^o]$ e que os ângulos pertencentes a H não necessitam ser inteiros, existem infinitos valores possíveis para H. Com o objetivo de facilitar a distinção de cores por daltônicos, o primeiro processamento de imagem implementado neste trabalho reduz o infinito conjunto de valores possíveis de H para um conjunto de 3, 6 ou 12 elementos.
 
 A transformação de H para 3 elementos é realizada através da Equação \ref{eq:reduzirHpara3}, para 6 através da Equação \ref{eq:reduzirHpara6} e para 12 através da Equação \ref{eq:reduzirHpara12}. 
 
@@ -1141,7 +1145,8 @@ H'''=\left\{
 
 Aplicando a Equação \ref{eq:reduzirHpara3} nas imagens, elas serão transformadas em imagens em tons de vermelho, verde e azul. Aplicando a Equação \ref{eq:reduzirHpara6}, as imagens serão compostas por tons de vermelho, amarelo, verde, ciano, azul e magenta. Por fim, aplicando a Equação \ref{eq:reduzirHpara6}, as imagens serão compostas por tons de vermelho, laranja, amarelo, oliva, verde, turquesa, ciano, celeste, azul, púrpura, magenta e rosa.
 
-A Figura \ref{fig:platesIshihara} foi processada utilizando as equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirHpara6} e \ref{eq:reduzirHpara12}, separadamente. Os respectivos resultados são apresentados nas Figuras \ref{fig:reduzirHpara3}, \ref{fig:reduzirHpara6} e \ref{fig:reduzirHpara12}.
+A Figura \ref{fig:platesIshihara} foi processada utilizando as Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirHpara6} e \ref{eq:reduzirHpara12}, separadamente. A Figura \ref{fig:reduzirHpara3} apresenta o resultado do processamento da Equação \ref{eq:reduzirHpara3} sobre a Figura \ref{fig:platesIshihara}, com isso o resultado apresentado é em tons de vermelho, verde e azul. Analogamente, a Figura \ref{fig:reduzirHpara6} apresenta o resultado do processamento da Equação \ref{eq:reduzirHpara6} sobre a Figura \ref{fig:platesIshihara}, o que resulta em uma imagem em tons de vermelho, amarelo, verde, ciano, azul e magenta. Por fim, a Figura \ref{fig:reduzirHpara12} apresenta o resultado do processamento da Equação \ref{eq:reduzirHpara12} sobre a Figura \ref{fig:platesIshihara} e o resultado é uma imagem em tons de vermelho, laranja, amarelo, oliva, verde, turquesa, ciano, celeste, azul, púrpura, magenta e rosa.
+
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.80\textwidth]{platesIshihara.png}
@@ -1163,7 +1168,7 @@ A Figura \ref{fig:platesIshihara} foi processada utilizando as equações \ref{e
 \caption{Resultado da Equação \ref{eq:reduzirHpara12} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHpara12}}
 \end{figure}
 
-Adicionalmente a redução de elementos do conjunto o qual H pertence, também foi implementado métodos de limitar os valores da saturação e do valor ou intensidade das imagens, conforme as equações \ref{eq:reduzirS}, \ref{eq:reduzirI} e \ref{eq:reduzirV}.
+Com o objetivo de reduzir os possíveis valores da saturação, intensidade e valor, foi desenvolvido um método para converter os valores desses elementos em apenas quatro valores possíveis: $0$, $0.33$, $0.66$ e $1$. A limitação da saturação para esses valores é realizada através das Equação \ref{eq:reduzirS}, da intensidade através da Equação \ref{eq:reduzirI} e a Equação \ref{eq:reduzirV} apresenta o processamento para a limitação dos valores possíveis do componente V.
 
 \begin{equation}
 \label{eq:reduzirS}
@@ -1198,7 +1203,7 @@ V'=\left\{
 \end{array}\right.
 \end{equation}
 
-A Figura \ref{fig:reduzirHSeV} ilustra a aplicação das equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirV} sobre a Figura \ref{fig:platesIshihara} e a A Figura \ref{fig:reduzirHSeI} ilustra a aplicação das equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirI} sobre a Figura \ref{fig:platesIshihara}.
+A Figura \ref{fig:reduzirHSeV} ilustra a aplicação das Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirV} sobre a Figura \ref{fig:platesIshihara}, com isso o resultado é apresentado em tons de vermelho, verde e azul e os valores de S e V são limitados aos valor $0$, $0.33$, $0.66$ e $1$. Analogamente, a Figura \ref{fig:reduzirHSeI} ilustra a aplicação das equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirI} sobre a Figura \ref{fig:platesIshihara} e o resultado é semelhante, a diferença apresentada é resultante a diferença de representação dos valores do componente valor (V) do sistema de cor HSV e do componente intensidade (I) do sistema de cor HSI.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.80\textwidth]{figuraDeslocarHSeV.jpg}
@@ -1210,15 +1215,14 @@ A Figura \ref{fig:reduzirHSeV} ilustra a aplicação das equações \ref{eq:redu
 \caption{Resultado da aplicação das Equações \ref{eq:reduzirHpara3}, \ref{eq:reduzirS} e \ref{eq:reduzirI} sobre a Figura \ref{fig:platesIshihara}. \label{fig:reduzirHSeI}}
 \end{figure}
 
-Os resultados apresentados nesta Subseção não foram satisfatórios. Para poucas pranchas contidas na Figura \ref{fig:platesIshihara}, o número contido dentro dessas pranchas ficou mais fácil de ser identificado após os processamentos descritos. 
 
-Foram implementados outros dois processamentos com o objetivo de reduzir os valores da matiz, um com o objetivo de eliminar os valores próximos a $60^o$ e o outro com o objetivo de eliminar os valores próximos a região que mais possui valores incidentes em H, ou seja, o pico do histograma. Para esses processamentos, os valores próximos de um ângulo foram definidos como os valores que estão até $60^o$ de distância desse ângulo (e.g. valores próximos a $60^o$ são os valores que estão no intervalo $[0^o;120^o]$).
+Foram implementados outros dois processamentos com o objetivo de reduzir os valores da matiz, um com o objetivo de eliminar os valores próximos a $60^o$ e o outro com o objetivo de eliminar os valores próximos a região que mais possui valores incidentes em H, o tamanho dessa região é de $1^o$. Para esses processamentos, os valores próximos de um ângulo foram definidos como os valores que estão até $60^o$ de distância desse ângulo (e.g. valores próximos a $60^o$ são os valores que estão no intervalo $[0^o,120^o]$).
 
-O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esses motivos entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de eliminar os valores próximos a $60^o$, os valores do intervalo $[0^o;60^o]$ foram compactados no intervalo $[320^o;360^o$] e todos os valores do intervalo $[240^o;360^o]$ foram compactados no intervalo $[240^o;320^o[$. Analogamente, os valores do intervalo $]60^o;120^o]$ foram compactados no intervalo $[120^o; 160^o]$ e todos os valores do intervalo $[120^o;240^o[$ foram compactados no intervalo $]160^o;240^o[$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirV}. A Figura \ref{fig:figuraColorsHamarelo} ilustra os possíveis valores após distanciar os valores próximos a $60^o$. A Figura \ref{fig:reduzirHamareloHSI} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirI}.
+O ângulo que representa amarelo em H é $60^o$. Amarelo está exatamente entre o verde e o vermelho. A maioria dos daltônicos possuem dificuldade para distinguir verde e vermelho, conforme descrito na Seção \ref{sec:tiposDaltonismo}. Por esse motivo entende-se que as cores que a maioria dos daltônicos possuem dificuldade de enxergar estão entre o vermelho e o verde. Afim de eliminar os valores próximos a $60^o$, os valores do intervalo $[0^o,60^o]$ foram compactados no intervalo $[320^o,360^o]$ e todos os valores do intervalo $[240^o,360^o]$ foram compactados no intervalo $[240^o,320^o)$. Analogamente, os valores do intervalo $(60^o;120^o]$ foram compactados no intervalo $[120^o,160^o]$ e todos os valores do intervalo $[120^o,240^o)$ foram compactados no intervalo $(160^o;240^o)$. A Figura \ref{fig:figuraColorsHamarelo} ilustra os possíveis valores de H após deslocar os valores próximos a $60^o$. A Figura \ref{fig:reduzirHamarelo} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirV}, as quais limitam os valores de H e V. A Figura \ref{fig:reduzirHamareloHSI} ilustra esse processamento sobre a Figura \ref{fig:platesIshihara}, juntamente com os processamentos definidos nas Equações \ref{eq:reduzirS} e \ref{eq:reduzirI}, as quais limitam os valores de H e I.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.40\textwidth]{figuraColorsHamarelo.PNG}
-\caption{Possíveis valores após distanciar valores próximos a $60^o$.}
+\caption{Possíveis valores após distanciar valores próximos a $60^o$. (adaptado de \citeonline{onextrapixel}}
 \label{fig:figuraColorsHamarelo}
 \end{figure}
 
@@ -1234,7 +1238,7 @@ O valor que representa o valor de amarelo em H é $60^o$. Amarelo está exatamen
 \label{fig:reduzirHamareloHSI}
 \end{figure}
 
-Foi implementado um método que divide H em 360 intervalos e identifica qual intervalo possui mais incidências. Se um pixel é branco, ele não é contabilizado, pois o valor de H é indiferente. Nesse método, o intervalo $0$ representa $0^o$, o intervalo $1$ representa $1^o$ e assim sucessivamente. Após identificar esse valor, a definição do intervalo que será eliminado segue a mesma analogia da eliminação dos valores de H próximos a $60^o$. No entanto, nesse método, os valores eliminados serão os que estão próximos ao valor com maior número de incidências encontrado. Por exemplo, na imagem original da Figura \ref{fig:figuraHistogramaHSV} o valor com $35^o$ é o com maior número de incidências, então os valores próximos a $35^o$ serão eliminados, que são os valores contidos no intervalo $[0^o;95^o] \cup [335^o;360^o]$. As Figuras \ref{fig:figuraHistogramaHSV}, \ref{fig:figuraHistogramaHSV2} e \ref{fig:figuraHistogramaHSV3} apresentam o resultado desse processamento em algumas pranchas de Ishihara. Se esse método fosse executado tendo como entrada a Figura \ref{fig:platesIshihara}, ele encontraria o intervalo que possui mais incidências em todas as pranchas e não em cada prancha separadamente.
+O último método implementado com o objetivo de elimitar intervalos na matiz é um método que divide H em 360 intervalos e identifica qual intervalo possui mais incidências. Se um pixel é branco, ele não é contabilizado, pois o valor de H é indiferente para os pixels brancos. Após identificar esse valor, a definição do intervalo que será eliminado segue a mesma analogia da eliminação dos valores de H próximos a $60^o$. No entanto, nesse método, os valores eliminados serão os que estão próximos ao valor com maior número de incidências encontrado. Por exemplo, na imagem original da Figura \ref{fig:figuraHistogramaHSV} o valor com $35^o$ é o com maior número de incidências, então os valores próximos a $35^o$ serão eliminados, que são os valores contidos no intervalo $[0^o,95^o] \cup [335^o;360^o]$. As Figuras \ref{fig:figuraHistogramaHSV}, \ref{fig:figuraHistogramaHSV2} e \ref{fig:figuraHistogramaHSV3} apresentam o resultado desse processamento em algumas pranchas de Ishihara, para cada uma dessas pranchas o intervalo com maior incidência é diferente. Se esse método fosse executado com a Figura \ref{fig:platesIshihara} como entrada, ele encontraria o intervalo que possui mais incidências em todas as pranchas e não em cada prancha separadamente. Todas as figuras apresentadas para esse método também foram processadas pelos processamentos que limitam os valores de H, S, V ou I em quatro valores ($0$,$0.33$,$0.66$ e $1$).
 
 
 \begin{figure}[!htb]
@@ -1252,12 +1256,12 @@ Foi implementado um método que divide H em 360 intervalos e identifica qual int
 \caption{Resultado após eliminar os valores próximos a $56^o$ e limitando a quantidade de valores para saturação e valor ou intensidade.} \label{fig:figuraHistogramaHSV3}
 \end{figure}
 
-Os processamentos apresentados nesta Subseção limitam as cores, tornando mais fácil a identificação das diferenças entre as cores pela maioria dos daltônicos. No entanto, devido a grande abstração que foi realizada nos sistemas de cores HSV e HSI, muitas características são perdidas, o que faz com que os valores dentro de algumas pranchas não possam ser identificados. Em alguns casos, a identificação das cores torna-se mais complicada até mesmo para pessoas que não são portadoras de daltonismo.
+Os processamentos apresentados nesta Subseção limitam as cores, tornando mais fácil a identificação das diferenças entre as cores pela maioria dos daltônicos. Porém, devido a grande abstração que foi realizada nos sistemas de cores HSV e HSI, muitas características são perdidas, o que faz com que os números dentro de algumas pranchas não possam ser identificados. Em alguns casos, a identificação das cores torna-se mais complicada até mesmo para pessoas que não são portadoras de daltonismo.
 
 \subsection{Deslocar os valores da matiz}
 \label{subsec:deslocarMatiz}
 
-Esse método desloca todos os valores da matiz H. Com isso, todos os valores de H serão modificados para outros valores. O objetivo desse processamento é deslocar cores que estão em um intervalo confuso para pessoas daltônicas para outro intervalo onde não há confusão de cores. No entanto, ao mesmo tempo em que alguns valores saem do intervalo confuso, outros entram nesse intervalo. As Equações \ref{eq:deslocarH120} e \ref{eq:deslocarH240} apresentam o processamento necessário para deslocar os valores de H em $120^o$ e $240^o$, respectivamente. A Tabela \ref{tab:exemplosDeslocamento} apresenta o resultado desses processamentos para alguns valores de H.
+Esse método desloca todos os valores da matiz H. Com isso, todos os valores de H serão modificados para outros valores. O objetivo desse processamento é deslocar cores que estão em um intervalo confuso para pessoas daltônicas para outro intervalo onde não há confusão de cores. Porém, é importante destacar que ao mesmo tempo em que alguns valores saem do intervalo confuso, outros entram nesse intervalo. As Equações \ref{eq:deslocarH120} e \ref{eq:deslocarH240} apresentam o processamento necessário para deslocar os valores de H em $120^o$ e $240^o$, respectivamente. A Tabela \ref{tab:exemplosDeslocamento} apresenta o resultado desses processamentos para alguns valores de H.
 
 \begin{equation}
 \label{eq:deslocarH120}
@@ -1303,9 +1307,9 @@ $330^o$                 & $90^o$                        &  $210^o$              
 
 Relacionando a Tabela \ref{tab:coresEmH} com a Tabela \ref{tab:exemplosDeslocamento}, se observa que para o deslocamento de $120^o$ a cor vermelha é transformada em verde, a cor verde em azul e a cor azul em vermelha. Com essa mesma relação, se pode observar que para o deslocamento de $240^o$ a cor vermelha é transformada em azul, a verde em vermelho e a azul em verde.
 
-A Figura \ref{fig:deslocamento120} exibe o resultado do processamento da Equação \ref{eq:deslocarH120} sobre a Figura \ref{fig:platesIshihara}, as cores da imagem se alteram completamente nessa figura. Devido ao fato de que as pranchas de Ishihara foram criadas com o objetivo de identificar o tipo de daltonismo vermelho-verde, a maioria dos pixels das pranchas desse teste são coloridos com as cores vermelho, verde ou cores formadas através da mistura dessas duas cores. Por deslocar os valores de H em $120^o$, a maioria dos pixels da Figura \ref{fig:deslocamento120} são verde, azul ou a mistura dessas duas cores.
+A Figura \ref{fig:deslocamento120} exibe o resultado do deslocamento de $120^o$  sobre a Figura \ref{fig:platesIshihara}, as cores da imagem se alteram completamente nessa figura, mas nenhum abstração é realizada. Devido ao fato de que as pranchas de Ishihara foram criadas com o objetivo de identificar o tipo de daltonismo vermelho-verde, a maioria dos pixels das pranchas desse teste são vermelho, verde ou cores que estão entre os ângulos $0^o$ e $120^o$ em H. Por deslocar os valores de H em $120^o$, a maioria dos pixels da Figura \ref{fig:deslocamento120} são verde, azul ou cores que estão entre os ângulos $120^o$ e $240^o$ em H.
 
-A Figura \ref{fig:deslocamento240} exibe o resultado do processamento da Equação \ref{eq:deslocarH240} sobre a Figura \ref{fig:platesIshihara}. Analogamente a Figura \ref{fig:deslocamento120}, a maoria dos pixels da Figura \ref{fig:deslocamento240} são azul, vermelho ou a mistura dessas duas cores.
+Analogamente ao deslocamento de $120^o$, a Figura \ref{fig:deslocamento240} exibe o resultado do deslocamento de $240^o$ sobre a Figura \ref{fig:platesIshihara}. Com isso, a maioria dos pixels da Figura \ref{fig:deslocamento240} são azul, vermelho ou cores que estão entre os ângulos $240^o$ e $360^o$ em H.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.80\textwidth]{figuraDeslocar120.jpg}
@@ -1317,9 +1321,13 @@ A Figura \ref{fig:deslocamento240} exibe o resultado do processamento da Equaç�
 \caption{Processamento da Equação \ref{eq:deslocarH240} sobre a Figura \ref{fig:platesIshihara}. \label{fig:deslocamento240}}
 \end{figure}
 
-O resultado do processamento obtido nessa Subseção não abstrai os valores de H. Com isso, nenhuma característica das imagens é perdida. Com esse processamento, os números das pranchas de Ishihara foram identificados nas Figuras \ref{fig:deslocamento120} e \ref{fig:deslocamento240} pelo proponente. Afim de verificar se o mesmo ocorre com outros daltônicos, esse processamento será integrado a ferramenta desenvolvida.
+Deslocando os valores de H da Figura \ref{fig:figuraPimentaOriginal} em $120^o$ e $240^o$, é possível observar que os objetos das imagens resultantes são apresentados em outras cores. Para as imagens resultantes desses deslocamentos, a diferença de cores entre os objetos também podem ser observadas por daltônicos do tipo protanopia e deuteranopia, conforme é possível verificar na Figura  \ref{fig:figuraSimulacaoH}. Nas imagens simuladas dessa figura é possível verificar que os daltônicos do tipo protanopia e deuteranopia conseguem distinguir a cor da pimenta e a cor do galho onde a pimenta se encontra. Isso não acontece na simulação de daltonismo para a imagem original, sem nenhum processamento, conforme foi apresentado na Seção \ref{sec:simulacao}.
 
-Aplicando o processamento descrito nas Equações \ref{eq:deslocarH120} e \ref{eq:deslocarH240} sobre a imagem original da Figura \ref{fig:figuraSimulador}, é possível observar que os objetos da imagem são apresentados em outras cores, mas nenhuma abstração é realizada. Para as imagens resultantes dos processamentos realizados, as características também podem ser observadas por daltônicos do tipo protanopia e deuteranopia, conforme é possível verificar aplicando a simulação de daltonismo. A Figura \ref{fig:figuraSimulacaoH} apresenta as imagens processadas e as imagens resultantes da simulação para os tipos protanopia e deuteranopia, nas imagens simuladas é possível verificar que os daltônicos com esses tipos de deficiência conseguem visualizar que a cor da pimenta é diferente da cor do galho onde a pimenta se encontra. Isso não acontece na simulação de daltonismo para a imagem original, conforme se pode verificar na Figura \ref{fig:figuraSimulador}.
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.4\linewidth]{figuraSimuladorOriginal.png}
+\caption{Imagem utilizada para a simulação de daltonismo. (retirado de  \citeonline{jlee2008})}
+\label{fig:figuraPimentaOriginal}
+\end{figure}
 
 \begin{figure}[!htb]
 \minipage{0.30\textwidth}
@@ -1355,17 +1363,19 @@ Aplicando o processamento descrito nas Equações \ref{eq:deslocarH120} e \ref{e
 (f)
 \endminipage\hfill
 \caption{
-(a) Aplicação da Equação \ref{eq:deslocarH120} sobre a imagem original da Figura \ref{fig:figuraSimulador}. (b) Simulação de protanopia sobre a imagem (a). (c) Simulação de deuteranopia sobre a imagem (a). (d) Aplicação da Equação \ref{eq:deslocarH240} sobre a imagem original da Figura \ref{fig:figuraSimulador}. (e) Simulação de protanopia sobre a imagem (d).
+(a) Aplicação da Equação \ref{eq:deslocarH120} sobre a Figura \ref{fig:figuraPimentaOriginal}. (b) Simulação de protanopia sobre a imagem (a). (c) Simulação de deuteranopia sobre a imagem (a). (d) Aplicação da Equação \ref{eq:deslocarH240} sobre a imagem original da Figura \ref{fig:figuraPimentaOriginal}. (e) Simulação de protanopia sobre a imagem (d).
 (f) Simulação de deuteranopia sobre a imagem (d). (adaptado de \citeonline{jlee2008})}
 \label{fig:figuraSimulacaoH}
 \end{figure}
 
+O resultado do processamento obtido nessa Subseção não abstrai os valores de H. Com isso, nenhuma característica das imagens é perdida. Com esse processamento, os números das pranchas de Ishihara foram identificados nas Figuras \ref{fig:deslocamento120} e \ref{fig:deslocamento240} pelo proponente, porque as cores das pranchas foram transformadas para cores em que o proponente não possui dificuldade em distinguir. Afim de verificar se o mesmo ocorre com outros daltônicos, esse processamento será integrado aos testes, a pesquisa e a ferramenta desenvolvidos para este trabalho.
+
 \subsection{Elevar os valores da saturação, intensidade ou valor}
 \label{subsec:deslocarVouI}
 
-Assim como o processamento apresentado na Subseção \ref{subsec:eliminarIntervalosH}, esse processamento é iniciado com a conversão de uma imagem RGB para o sistema de cores HSV ou HSI, após essa conversão outro processamento é realizado no sistema de cores HSV ou HSI e por fim a imagem é convertida de volta para o sistema de cores RGB. As conversões entre os sistemas de cores não são descritas nos processamentos apresentados, entende-se que elas são obrigatórias para todos os processamentos descritos neste trabalho.
+Assim como os outros processamentos apresentados nesta seção, esse processamento é iniciado com a conversão de uma imagem RGB para o sistema de cores HSV ou HSI, após essa conversão outro processamento é realizado no sistema de cores HSV ou HSI e por fim a imagem é convertida de volta para o sistema de cores RGB. As conversões entre os sistemas de cores não são descritas nos processamentos apresentados, entende-se que elas são obrigatórias para todos os processamentos descritos neste trabalho.
 
-A ideia básica desse processamento consiste em multiplicar os valores de V ou I por um escalar. Quanto maior esse escalar, mais vibrante ou intensa a cor. Porém, é necessário verificar se o resultado dessa multiplicação não é maior do que o maior valor permitido para os elementos de V ou I, ou seja, se não é maior do que $1$. Para o sistema de cores HSV, esse processamento é descrito na Equação \ref{eq:elevarV}, onde o escalar é representado pela letra $x$, e para o sistema de cores HSI o processamento é descrito na Equação \ref{eq:elevarI}, onde o escalar é representado por $y$.
+A ideia básica desse processamento consiste em multiplicar os valores de V ou I por um escalar. Quanto maior esse escalar, mais vibrante ou intensa a cor. Porém, é necessário verificar se o resultado dessa multiplicação não é maior do que o maior valor permitido para os elementos de V ou I, ou seja, se não é maior do que $1$. Para o sistema de cores HSV, esse processamento é descrito na Equação \ref{eq:elevarV}, a qual eleva os valores do componente V e onde o escalar é representado pela letra $x$. Para o sistema de cores HSI o processamento é descrito na Equação \ref{eq:elevarI}, onde os valores de I são elevados e o escalar é representado por $y$.
 
 \begin{equation}
 \label{eq:elevarV}
@@ -1385,7 +1395,7 @@ I'=\left\{
 \end{array}\right.
 \end{equation}
 
-As Figuras \ref{fig:figuraElevarV} e \ref{fig:figuraElevarI} ilustram o resultado obtido após o processamento descrito nas Equações \ref{eq:elevarV} e \ref{eq:elevarI}, respectivamente, sobre a Figura \ref{fig:platesIshihara}, com $x = 3$ e $y = 3$.
+A Figura \ref{fig:figuraElevarV} ilustra o resultado da elevação dos valores do componente V, o qual pertence ao sistema de cor HSV, e a Figura \ref{fig:figuraElevarI} ilustra o resultado da elevação dos valores do componente I, do sistema de cor HSI. Para ambos processamentos, os escalares que são multiplicados pelos componente é igual à $3$, ou seja, na Equação \ref{eq:elevarV} $x=3$ e na Equação \ref{eq:elevarI} $y=3$.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.80\textwidth]{figuraElevarV.jpg}
@@ -1397,7 +1407,7 @@ As Figuras \ref{fig:figuraElevarV} e \ref{fig:figuraElevarI} ilustram o resultad
 \caption{Processamento da Equação \ref{eq:elevarI} sobre a Figura \ref{fig:platesIshihara}, com $y = 3$. \label{fig:figuraElevarI}}
 \end{figure}
 
-Para tornar as cores das imagens ainda mais vibrantes e intensas, também foi implementado um método para realçar a saturação das imagens. Esse método utiliza a mesmo lógica apresentada nas Equações \ref{eq:elevarV} e \ref{eq:elevarI}, multiplicando os valores da componente S por um escalar $z$, conforme apresentado na Equação \ref{eq:elevarS}.
+Para tornar as cores das imagens ainda mais vibrantes e intensas, também foi implementado um método para realçar a saturação das imagens. Esse método utiliza a mesma lógica apresentada nas Equações \ref{eq:elevarV} e \ref{eq:elevarI}, ou seja, multiplica os valores do componente S por um escalar, conforme apresentado na Equação \ref{eq:elevarS}. Nesse caso, o escalar é representado pela letra $z$.
 
 \begin{equation}
 \label{eq:elevarS}
@@ -1408,7 +1418,7 @@ S'=\left\{
 \end{array}\right.
 \end{equation}
 
-Algumas imagens foram adicionadas a esse trabalho para ilustrar o resultado da Equação \ref{eq:elevarS}. A Figura \ref{fig:figuraElevarS} apresenta o resultado dessa equação com $z=3$. A Figura \ref{fig:figuraElevarSeV} apresenta a imagem resultante dos processamentos das Equações \ref{eq:elevarV} e \ref{eq:elevarS}, com $z = 3$ e $x = 3$. A Figura \ref{fig:figuraElevarSeI} apresenta a imagem resultante dos processamentos das Equações \ref{eq:elevarI} e \ref{eq:elevarS}, com $z = 3$ e $y = 3$.
+Algumas figuras foram adicionadas a esse trabalho para ilustrar o resultado da elevação da saturação. A Figura \ref{fig:figuraElevarS} apresenta o resultado apenas do processamento de elevar a saturação, com $z=3$. A Figura \ref{fig:figuraElevarSeV} apresenta a imagem resultante das elevações dos componentes S e V, com $z = 3$ e $x = 3$. Por fim, a Figura \ref{fig:figuraElevarSeI} apresenta a imagem resultante dos processamentos que elevam os valores da saturação e intensidade, com $z = 3$ e $y = 3$.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.80\textwidth]{figuraElevarS.jpg}
@@ -1425,9 +1435,9 @@ Algumas imagens foram adicionadas a esse trabalho para ilustrar o resultado da E
 \caption{Processamento das Equações \ref{eq:elevarS} e \ref{eq:elevarI} sobre a Figura \ref{fig:platesIshihara}, com $z = 3$ e $y = 3$. \label{fig:figuraElevarSeI}}
 \end{figure}
 
-Os resultados obtidos com os processamentos que utilizam o sistema de cores HSI também não foram satisfatórios. Ao contrário dos resultados obtidos com os processamentos apresentados nesta Subseção utilizando o sistema de cores HSV.
+Os resultados obtidos com os processamentos que utilizam o sistema de cores HSI não foram satisfatórios, ao contrário dos resultados obtidos com os processamentos apresentados nesta subseção utilizando o sistema de cores HSV.
 
-Com o sistema HSV, os processamentos descritos nas Equações \ref{eq:elevarV} e \ref{eq:elevarS} resultaram em imagens as quais os números contidos nas pranchas de Ishihara são facilmente identificados pelo proponente deste trabalho, que é portador de daltonismo. Afim de verificar se o mesmo ocorre com outras pessoas daltônicas, um site foi desenvolvido para obter opiniões de daltônicos sobre o processamento realizado sobre o sistema HSV, o qual foi descrito nessa Subseção.
+Com o sistema HSV, os processamentos descritos nas Equações \ref{eq:elevarV} e \ref{eq:elevarS}, com as consultantes maiores ou iguais a 3, resultaram em imagens as quais os números contidos nas pranchas de Ishihara são facilmente identificados pelo proponente deste trabalho, que é portador de daltonismo. Afim de verificar se o mesmo ocorre com outras pessoas daltônicas, esse processamento será adicionado aos testes, a pesquisa e a ferramenta que foram desenvolvidos durante este TCC.
 
 A Figura \ref{fig:figuraRealVeS} apresenta os resultados da aplicação dos processamentos descritos nas Equações \ref{eq:elevarV} e \ref{eq:elevarS} em fotografias reais, com $x = 2$ e $z = 2$.
 
@@ -1436,13 +1446,13 @@ A Figura \ref{fig:figuraRealVeS} apresenta os resultados da aplicação dos proc
 \caption{Processamento das Equações \ref{eq:elevarS} e \ref{eq:elevarV} sobre imagens reais, com $z = 2$ e $y = 2$. \label{fig:figuraRealVeS}}
 \end{figure}
 
-\section{Ferramenta}
+\section{Site}
 
 Com o objetivo de validar se os processamentos descritos nas Subseções \ref{subsec:deslocarMatiz} e \ref{subsec:deslocarVouI}, foi criado um site utilizando a plataforma \citeonline{googleappengine2015}. Essa plataforma utiliza o conceito de nuvem e é classificada como PaaS (Plataforma como um serviço, do inglês Platform as a Service). É possível utilizar as linguagens de programação Python, Java, PHP ou GO para desenvolver aplicativos que serão hospedados no Google App Engine. Devido a experiência do proponente com a linguagem de programação Java, essa foi a linguagem de programação escolhida para o desenvolvimento do site. 
 
-Para armazenar as informações geradas através do uso da aplicação pelos usuários, foi utilizado o banco de dados do Google chamado Datastore \cite{googleclouddatastore}. Esse banco de dados utiliza o conceito NoSQL e os dados também ficam armazenados em nuvem. Assim como as informações da aplicação, o banco de dados pode ser acessado através do site http://appengine.google.com/ após realizar login com a conta do Google.
+Para armazenar as informações geradas através do uso da aplicação pelos usuários, foi utilizado o banco de dados do Google chamado \citeonline{googleclouddatastore}. Esse banco de dados utiliza o conceito NoSQL e os dados também ficam armazenados em nuvem. Assim como as informações da aplicação, o banco de dados pode ser acessado através do site http://appengine.google.com/ após realizar login com a conta do Google.
 
-Afim de facilitar a programação para acessar ou incluir os dados no Datastore, foi utilizada a API (Interface de Programação de Aplicativos, do inglês Application Programming Interface) para acesso de dados chamada \citeonline{objectify2015}. Outro framework utilizado para facilitar a programação foi o \citeonline{Bootstrap}. No entanto, o Bootstrap facilita a manipulação do layout da aplicação.
+Afim de facilitar a programação para acessar ou incluir os dados no Datastore, foi utilizada a API (Interface de Programação de Aplicativos, do inglês Application Programming Interface) para acesso de dados chamada \citeonline{objectify2015}. Outro framework utilizado para facilitar a programação foi o \citeonline{Bootstrap}, o qual facilita a manipulação do layout da aplicação.
 
 O site possui as cinco telas abaixo:
 
@@ -1461,12 +1471,14 @@ O teste original utiliza as 21 pranchas de Ishihara que estão na Figura \ref{fi
 
 Foi percebido que o contraste do dispositivo utilizado para a realização do teste influencia no resultado. Por esse e por outros motivos, não é possível definir se uma pessoa é daltônica somente após a realização do teste de Ishihara. No entanto, juntamente com a quantidade de acertos, é apresentado ao usuário com base no resultado do teste se ele possui indícios de ser daltônico. Também é apresentada uma mensagem ao usuário recomendando a procura de um especialista para um diagnóstico preciso.
 
-A Figura \ref{fig:telaTesteOriginal} apresenta a tela do teste original e a Figura \ref{fig:telaResultadoOriginalErro} apresenta o resultado caso o usuário não acerte todas as alternativas e a Figura \ref{fig:telaResultadoOriginal} caso acerte todas as alternativas.
+A Figura \ref{fig:telaTesteOriginal} apresenta a tela do teste original. Nessa tela, as respostas fornecidas para outras pranchas são apresentadas a direita, os botões Voltar e Próximo são utilizados para navegar entre as pranchas e o campo de texto é utilizado para obter o número que o usuário visualiza na imagem.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.8\textwidth]{telaTesteOriginal.jpg}
 \caption{Página com o teste original.} \label{fig:telaTesteOriginal}
 \end{figure}
+
+As Figuras \ref{fig:telaResultadoOriginalErro} e \ref{fig:telaResultadoOriginal} apresentam os resultados que os usuários visualizam após completar o teste. A Figura \ref{fig:telaResultadoOriginalErro} apresenta o caso em que o usuário não acerte todos os números nas pranchas e a Figura \ref{fig:telaResultadoOriginal} caso acerte todos.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.8\textwidth]{telaResultadoOriginalErro.jpg}
@@ -1500,7 +1512,7 @@ Os parâmetros Saturação e Intensidade definem os valores das constantes $z$ e
 \centering
 \begin{tabular}{cccc}
 \hline      
-\textbf{Valor escolhido} & \textbf{Saturação} & \textbf{Intensidade}     \\ \hline
+\textbf{Valor escolhido} & \textbf{Saturação} & \textbf{Valor}     \\ \hline
 0                        & $z = 1$            &  $x = 1$                          \\ \hline
 1                        & $z = 1.2$          &  $x = 1.2$                          \\ \hline
 2                        & $z = 1.4$          &  $x = 1.4$                          \\ \hline 
@@ -1515,6 +1527,7 @@ Os parâmetros Saturação e Intensidade definem os valores das constantes $z$ e
 \end{table}
 
 \subsection{Pesquisa}
+\label{subsec:pesquisa}
 
 Essa página é composta por um formulário que foi utilizado para obter informações adicionais dos usuários, com o objetivo de fortalecer os argumentos da conclusão sobre a ferramenta. Quando um usuário responde o formulário, as respostas vão para o banco de dados do Google App Engine, atreladas ao e-mail do usuário que respondeu as perguntas.
 
@@ -1525,7 +1538,7 @@ Neste formulário, o usuário precisa informar seu nome, sexo e se é daltônico
 \centering
 \begin{tabular}{cccc}
 \hline      
-\textbf{Valor escolhido} & \textbf{Saturação} & \textbf{Intensidade}     \\ \hline
+\textbf{Valor escolhido} & \textbf{Saturação} & \textbf{Valor}     \\ \hline
 0                        & $z = 1$            &  $x = 1$                          \\ \hline
 1                        & $z = 1.2$          &  $x = 1.2$                          \\ \hline
 2                        & $z = 1.4$          &  $x = 1.4$                          \\ \hline 
@@ -1539,7 +1552,7 @@ Neste formulário, o usuário precisa informar seu nome, sexo e se é daltônico
 10                       & $z = 10.0$         &  $x = 10$                           \\ \hline
 
 \end{tabular}
-\caption{Valores de $z$ e $x$ para as Equações \ref{eq:elevarS} e \ref{eq:elevarV} conforme parâmetros escolhidos para a pesquisa.}
+\caption{Valores de $x$ e $z$ para as Equações \ref{eq:elevarV} e \ref{eq:elevarS} conforme parâmetros escolhidos para a pesquisa.}
 \label{tab:parametrosPesquisa}
 \end{table}
 
@@ -1550,40 +1563,67 @@ Por fim, o usuário responde se conseguiu visualizar todos os números na imagem
 Parte da pesquisa pode ser visualizada na Figura \ref{fig:telaPesquisa}. A consolidação dos resultados obtidos com ela serão apresentadas no Capítulo \ref{cap:resultados}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.6\textwidth]{telaPesquisa.jpg}
+\centering \includegraphics[width=0.8\textwidth]{telaPesquisa.jpg}
 \caption{Alterar imagem} \label{fig:telaPesquisa}
 \end{figure}
 
 
 \subsection{Download}
 
-\begin{figure}[!htb]
-\centering \includegraphics[width=0.6\textwidth]{telaDownload.jpg}
-\caption{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa} \label{fig:figuraDownload}
-\end{figure}
+Nesta página há um link para realizar o download de arquivo com extensão JAR (Arquivo Java, do ingês Java ARchive). Esse arquivo é um software desenvolvido em Java para auxiliar daltônicos a distinguir cores. O único objetivo dessa página é disponibilizar essa aplicação para que os usuários façam download, conforme é possível verificar na Figura \ref{fig:figuraDownload}.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.6\textwidth]{telaFerramenta.jpg}
-\caption{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa} \label{fig:telaFerramenta}
+\centering \includegraphics[width=0.8\textwidth]{telaDownload.jpg}
+\caption{Tela para download do software desenvolvido.} \label{fig:figuraDownload}
 \end{figure}
+
+Assim como o site criado para realizar testes com os daltônicos, este software utiliza os processamentos descritos nas Subseções \ref{subsec:deslocarMatiz} e \ref{subsec:deslocarVouI}. Os parâmetros funcionam da mesma maneira que a tela pesquisa, descrita na Subseção \ref{subsec:pesquisa}. Se a opção $0^o$ for escolhida para o parâmetro girar, os valores da matiz não serão deslocados. Se a opção $120^o$ ou a opção $240^o$ for escolhida, os valores da matiz serão deslocados em $120^o$ ou $240^o$, respectivamente. As barras de controle para os parâmetros saturação e intensidade, definem os escalares que multiplicação das matrizes V e S, conforme descrito nas Equações \ref{eq:elevarV} e \ref{eq:elevarS}. No campo Imagem deve ser selecionada a imagem a qual será processada, e após selecioná-lo o usuário deve clicar sobre o botão Executar.
+
+A Figura \ref{fig:telaFerramenta} exibe a execução do aplicativo. Nessa figura, a imagem selecionada foi processada de acordo com as Equações \ref{eq:exemploS} e \ref{eq:exemploV}. O valores da matriz H não foram modificados.
+
+\begin{equation}
+\label{eq:exemploS}
+S'=\left\{
+\begin{array}{rl}
+       10 . S,&\mbox{se}\quad 10 . S < 1 \\
+       1,&\mbox{caso contrário}
+\end{array}\right.
+\end{equation}
+
+\begin{equation}
+\label{eq:exemploV}
+V'=\left\{
+\begin{array}{rl}
+       10 . V,&\mbox{se}\quad $x$ . V < 1 \\
+       1,&\mbox{caso contrário}
+\end{array}\right.
+\end{equation}
+
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.8\textwidth]{telaFerramenta.jpg}
+\caption{Software desenvolvido para cumprir o objetivo deste TCC.} \label{fig:telaFerramenta}
+\end{figure}
+
+O código fonte do método que realiza o processamento da imagem pode ser visualizado no Appendix \ref{ap:codigo}.
 
 
 \subsection{Sobre}
 
-Nenhum ação do usuário é esperada nessa tela. Ela possui o objetivo de informar ao usuário qual o objetivo deste trabalho e quem são as pessoas que estão envolvidas no seu desenvolvimento.
+Nenhum ação do usuário é esperada nessa página. Ela possui o objetivo de informar ao usuário qual o objetivo deste trabalho e o nome do proponente e da orientadora. Além disso, também é apresentada uma mensagem alertando o usuário que ele pode solicitar uma cópia deste trabalho escrevendo um e-mail para o seu proponente.
 
-É possível visualizar as informações apresentadas nessa tela na Figura \ref{fig:figuraSobre}.
+A Figura \ref{fig:figuraSobre} exibe o conteúdo dessa página.
 
 \begin{figure}[!htb]
-\centering \includegraphics[width=0.6\textwidth]{telaSobre.jpg}
-\caption{Alterar imagem} \label{fig:figuraSobre}
+\centering \includegraphics[width=0.8\textwidth]{telaSobre.jpg}
+\caption{Página sobre.} \label{fig:figuraSobre}
 \end{figure}
 
 % ---
 % Resultados
 % ---
 \chapter{Resultados}
-
+\label{cap:resultados}
 % ---
 % Conclusão
 % ---
@@ -1848,6 +1888,96 @@ Na Figura \ref{fig:apendiceClassificacao}, o objetivo das pranchas é diferencia
 
 \end{figure}
 
+\chapter{Código fonte}
+\label{ap:codigo}
+
+Abaixo estão os códigos fonte utilizados para realizar o processamento utilizado na aplicação desenvolvida para a cumprimento do objetivo desse TCC. Inicialmente foi implementado o método para processamento em MATLAB e posteriormente em Java.
+
+\textbf{MATLAB}
+\begin{lstlisting}
+
+function [Hmodificado, Smodificado, Vmodificado] = 
+ideiaRodar_HSV(img,graus,cS,cV,nomeSaida)
+
+    A = imread(img);
+    [H, S, V] = rgb2hsv(A);  
+    [M, N] = size(H);    
+    Hmodificado = zeros(M,N);
+    Smodificado = zeros(M,N);
+    Vmodificado = zeros(M,N);
+
+    for i=1:M
+        for j=1:N
+            Hmodificado(i,j) = H(i,j) + graus/360;
+            if(Hmodificado(i,j) > 1)
+                Hmodificado(i,j) = Hmodificado(i,j) - 1;
+            end
+       
+            Smodificado(i,j) = S(i,j) * cS;
+            if(Smodificado(i,j) > 1)
+                Smodificado(i,j) = 1;
+            end
+    
+            Vmodificado(i,j) = V(i,j) * cV;
+            if(Vmodificado(i,j) > 1)
+                Vmodificado(i,j) = 1;
+            end
+        end
+    end
+        
+    
+    D = hsv2rgb(Hmodificado,Smodificado, Vmodificado);
+    imshow(D);
+    saveas(gcf,nomeSaida,'jpg');
+end
+
+\end{lstlisting}
+
+\textbf{Java}
+\begin{lstlisting}
+public static BufferedImage processamento(BufferedImage image, 
+float angulo, float saturacao, float valor)
+  {
+    int height = image.getHeight();
+    int width = image.getWidth();
+    
+    float[] hsb = { 0.0F, 0.0F, 0.0F };
+    int[] rgb = image.getRGB(0, 0, width, height, null, 0,
+    width);
+    int[] modificada = image.getRGB(0, 0, width, height, null
+    , 0, width);
+    for (int i = 0; i < rgb.length; i++)
+    {
+      Color c = new Color(rgb[i]);
+      int red = c.getRed();
+      int green = c.getGreen();
+      int blue = c.getBlue();
+      
+      hsb = Color.RGBtoHSB(red, green, blue, hsb);
+      
+      hsb[0] += angulo / 360.0F;
+      if (hsb[0] > 1.0D) {
+        hsb[0] -= 1.0F;
+      }
+      hsb[1] *= saturacao;
+      if (hsb[1] > 1.0D) {
+        hsb[1] = 1.0F;
+      }
+      hsb[2] *= valor;
+      if (hsb[2] > 1.0D) {
+        hsb[2] = 1.0F;
+      }
+      modificada[i] = Color.HSBtoRGB(hsb[0], hsb[1], 
+      hsb[2]);
+    }
+    BufferedImage resultado = new BufferedImage(width, 
+    height, 2);
+    resultado.setRGB(0, 0, width, height, modificada, 
+    0, width);
+    
+    return resultado;
+  }
+\end{lstlisting}
 
 \end{apendicesenv}
 % ---
