@@ -704,7 +704,7 @@ As Figuras \ref{fig:figuraCuboRGB}, \ref{fig:figuraComponentesHSI} e \ref{fig:fi
 
 \subsection{HSV}
 
-O sistema de cores HSV também é denotado por HSB (matriz, saturação e brilho, do inglês hue, saturantion and brightness)\cite{burger2009digital}. A Figura \ref{fig:figuraHSV} apresenta uma possível representação gráfica do desse sistema de cores, a Figura \ref{fig:figuraHSV2} ilustra a posição de algumas cores dentro desse sistema e a Tabela \ref{tab:exemploHSV} lista os valores dos pontos que estão na Figura \ref{fig:figuraHSV2}.
+O sistema de cores HSV também é denotado por HSB (matriz, saturação e brilho, do inglês hue, saturantion and brightness) \cite{burger2009digital}. A Figura \ref{fig:figuraHSV} apresenta uma possível representação gráfica do desse sistema de cores, a Figura \ref{fig:figuraHSV2} ilustra a posição de algumas cores dentro desse sistema e a Tabela \ref{tab:exemploHSV} lista os valores dos pontos que estão na Figura \ref{fig:figuraHSV2}.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.4\textwidth]{figuraHSV.png}
@@ -1540,7 +1540,7 @@ Esta tela pode ser visualizada na Figura \ref{fig:telaTesteModificado}, onde o v
 Essa página é composta por um formulário que foi utilizado para obter informações adicionais dos usuários, com o objetivo de fortalecer os argumentos da conclusão sobre a ferramenta. Quando um usuário responde o formulário, as respostas vão para o banco de dados do Google App Engine, atreladas ao e-mail do usuário que respondeu as perguntas.
 
 
-Neste formulário, o usuário precisa informar seu nome, sexo e se é daltônico. Se ele for daltônico, ele pode informar quais são as cores que ele possui dificuldade de enxergar. Depois de informar essas informações, o usuário precisar alterar os parâmetros de calibração para que seja possível identificar todos os números de Ishihara na Figura \ref{fig:platesIshihara}. Conforme os parâmetros são alterados, a imagem exibida é alterada, seguindo a mesma lógica apresentada na Subseção \ref{subsec:testeModificado} para alterar as imagens. No entanto, para essa página, os valores dos parâmetros Saturação e Intensidade assume valores de 0 a 10 e os valores paras as Equações \ref{eq:elevarS} e \ref{eq:elevarV} são definidos conforme a Tabela \ref{tab:parametrosPesquisa}. 
+Neste formulário, o usuário precisa informar seu nome, sexo e se é daltônico. Se ele for daltônico, ele pode informar quais são as cores que ele possui dificuldade de enxergar. Depois de informar essas informações, o usuário precisar alterar os parâmetros de calibração para que seja possível identificar todos os números de Ishihara na Figura \ref{fig:platesIshihara}. Conforme os parâmetros são alterados, a imagem exibida é alterada, seguindo a mesma lógica apresentada na Subseção \ref{subsec:testeModificado} para alterar a imagem. No entanto, para essa página, os valores dos parâmetros Saturação e Intensidade assume valores de 0 a 10 e os valores utilizados nas constantes que elevam os valores dos componentes S e V, do sistema de cor HSV, são definidos conforme a Tabela \ref{tab:parametrosPesquisa}. 
 
 \begin{table}[ht]
 \centering
@@ -1564,7 +1564,7 @@ Neste formulário, o usuário precisa informar seu nome, sexo e se é daltônico
 \label{tab:parametrosPesquisa}
 \end{table}
 
-O objetivo é que o usuário altere os parâmetros o mínimo possível. Para isso, existe um valor que é apresentado na tela conforme ele altera os parâmetros. Esse valor é alterado quando qualquer um dos parâmetros é modificado e ele é formado pela soma dos valores escolhidos nos parâmetros Saturação de Intensidade. Além disso, caso o usuário escolha deslocar os valores da matiz em $120^o$ ou $240^o$, o valor resultante da soma desses dois parâmetros é incrementado em 10.
+O objetivo é que o usuário altere os parâmetros o mínimo possível. Para isso, existe um valor que é apresentado na tela conforme ele altera os parâmetros. Esse valor é alterado quando qualquer um dos parâmetros é modificado e ele é formado pela soma dos valores escolhidos nos parâmetros Saturação e Intensidade. Além disso, caso o usuário escolha deslocar os valores da matiz em $120^o$ ou $240^o$, o valor resultante da soma parâmetros Saturação de Intensidade é incrementado em 10.
 
 Por fim, o usuário responde se conseguiu visualizar todos os números na imagem após alterar os parâmetros. Essa informação só é válida caso o usuário seja daltônico, porque usuários que não são daltônicos deveriam visualizar todos os números nas pranchas sem alterar nenhum parâmetro.
 
@@ -1578,16 +1578,22 @@ Parte da pesquisa pode ser visualizada na Figura \ref{fig:telaPesquisa}. A conso
 
 \subsection{Download}
 
-Nesta página há um link para realizar o download de arquivo com extensão JAR (Arquivo Java, do ingês Java ARchive). Esse arquivo é um software desenvolvido em Java para auxiliar daltônicos a distinguir cores. O único objetivo dessa página é disponibilizar essa aplicação para que os usuários façam download, conforme é possível verificar na Figura \ref{fig:figuraDownload}.
+Nesta página há um link para realizar o download de um arquivo com extensão JAR (Arquivo Java, do ingês Java ARchive). Esse arquivo é um software desenvolvido em Java para auxiliar daltônicos a distinguir cores. O único objetivo dessa página é disponibilizar essa aplicação para que os usuários façam download, conforme é possível verificar na Figura \ref{fig:figuraDownload}.
 
 \begin{figure}[!htb]
 \centering \includegraphics[width=0.8\textwidth]{telaDownload.jpg}
 \caption{Tela para download do software desenvolvido.} \label{fig:figuraDownload}
 \end{figure}
 
-Assim como o site criado para realizar testes com os daltônicos, este software utiliza os processamentos descritos nas Subseções \ref{subsec:deslocarMatiz} e \ref{subsec:deslocarVouI}. Os parâmetros funcionam da mesma maneira que a tela pesquisa, descrita na Subseção \ref{subsec:pesquisa}. Se a opção $0^o$ for escolhida para o parâmetro girar, os valores da matiz não serão deslocados. Se a opção $120^o$ ou a opção $240^o$ for escolhida, os valores da matiz serão deslocados em $120^o$ ou $240^o$, respectivamente. As barras de controle para os parâmetros saturação e intensidade, definem os escalares que multiplicação das matrizes V e S, conforme descrito nas Equações \ref{eq:elevarV} e \ref{eq:elevarS}. No campo Imagem deve ser selecionada a imagem a qual será processada, e após selecioná-lo o usuário deve clicar sobre o botão Executar.
+Assim como o site criado para realizar testes com os daltônicos, este software utiliza os processamentos descritos nas Subseções \ref{subsec:deslocarMatiz} e \ref{subsec:deslocarVouI} para o sistema de cor HSV. Os parâmetros funcionam da mesma maneira que a tela pesquisa, descrita na Subseção \ref{subsec:pesquisa}. Se a opção $0^o$ for escolhida para o parâmetro girar, os valores da matiz não serão deslocados. Se a opção $120^o$ ou a opção $240^o$ for escolhida, os valores da matiz serão deslocados em $120^o$ ou $240^o$, respectivamente. As barras de controle para os parâmetros Saturação e Intensidade, definem os escalares que multiplicarão as matrizes V e S, afim de elevar os valores de V e S utilizando as Equações \ref{eq:elevarV} e \ref{eq:elevarS}. No campo Imagem deve ser selecionada a imagem a qual será processada, e após selecioná-la o usuário deve clicar sobre o botão Executar para que o processamento seja apresentado na tela.
 
-A Figura \ref{fig:telaFerramenta} exibe a execução do aplicativo. Nessa figura, a imagem selecionada foi processada de acordo com as Equações \ref{eq:exemploS} e \ref{eq:exemploV}. O valores da matriz H não foram modificados.
+A Figura \ref{fig:telaFerramenta} exibe a execução do aplicativo. Nessa figura, cada pixel da imagem selecionada foi processado de acordo com as Equações \ref{eq:exemploS} e \ref{eq:exemploV}, dado que o valor $10$ foi escolhido para os parâmetros Saturação e Intensidade. O valores da matriz H não foram modificados.
+
+
+\begin{figure}[!htb]
+\centering \includegraphics[width=0.8\textwidth]{telaFerramenta.jpg}
+\caption{Software desenvolvido para cumprir o objetivo deste TCC.} \label{fig:telaFerramenta}
+\end{figure}
 
 \begin{equation}
 \label{eq:exemploS}
@@ -1608,17 +1614,12 @@ V'=\left\{
 \end{equation}
 
 
-\begin{figure}[!htb]
-\centering \includegraphics[width=0.8\textwidth]{telaFerramenta.jpg}
-\caption{Software desenvolvido para cumprir o objetivo deste TCC.} \label{fig:telaFerramenta}
-\end{figure}
-
 O código fonte do método que realiza o processamento da imagem pode ser visualizado no Appendix \ref{ap:codigo}.
 
 
 \subsection{Sobre}
 
-Nenhum ação do usuário é esperada nessa página. Ela possui o objetivo de informar ao usuário qual o objetivo deste trabalho e o nome do proponente e da orientadora. Além disso, também é apresentada uma mensagem alertando o usuário que ele pode solicitar uma cópia deste trabalho escrevendo um e-mail para o seu proponente.
+Nenhum ação do usuário é esperada nessa página. Ela possui o objetivo de informar ao usuário qual o objetivo deste trabalho, o nome do proponente e o nome da orientadora. Além disso, também é apresentada uma mensagem alertando os usuários que eles podem solicitar uma cópia deste trabalho escrevendo um e-mail para o seu proponente.
 
 A Figura \ref{fig:figuraSobre} exibe o conteúdo dessa página.
 
@@ -1899,7 +1900,7 @@ Na Figura \ref{fig:apendiceClassificacao}, o objetivo das pranchas é diferencia
 \chapter{Código fonte}
 \label{ap:codigo}
 
-Abaixo estão os códigos fonte utilizados para realizar o processamento utilizado na aplicação desenvolvida para a cumprimento do objetivo desse TCC. Inicialmente foi implementado o método para processamento em MATLAB e posteriormente em Java.
+Abaixo estão os códigos fonte utilizados para realizar os processamentos utilizados no site e no software que foram criados para o  cumprimento do objetivo desse TCC. Inicialmente foi implementado o método para processamento em MATLAB e posteriormente em Java.
 
 \textbf{MATLAB}
 \begin{lstlisting}
@@ -1964,15 +1965,15 @@ float angulo, float saturacao, float valor)
       hsb = Color.RGBtoHSB(red, green, blue, hsb);
       
       hsb[0] += angulo / 360.0F;
-      if (hsb[0] > 1.0D) {
+      if (hsb[0] > 1.0F) {
         hsb[0] -= 1.0F;
       }
       hsb[1] *= saturacao;
-      if (hsb[1] > 1.0D) {
+      if (hsb[1] > 1.0F) {
         hsb[1] = 1.0F;
       }
       hsb[2] *= valor;
-      if (hsb[2] > 1.0D) {
+      if (hsb[2] > 1.0F) {
         hsb[2] = 1.0F;
       }
       modificada[i] = Color.HSBtoRGB(hsb[0], hsb[1], 
